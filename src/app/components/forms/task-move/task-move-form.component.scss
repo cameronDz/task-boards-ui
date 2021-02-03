@@ -1,0 +1,22 @@
+.form-container {
+  min-height: 100%;
+  padding-bottom: -32px;
+
+  .list-title {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .board-name {
+    cursor: pointer;
+    font-weight: 700;
+    margin: 8px;
+
+    &:hover {
+      background-color: lightgray;
+    }
+  }
+}
+
+.button-container {
+  margin-top: -32px;
+}

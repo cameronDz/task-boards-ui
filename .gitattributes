@@ -1,0 +1,12 @@
+# set config for storing files in source control
+*.html text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+
+.babelrc text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# Denote all files that are truly binary and should not be modified.
+*.ico binary
+*.png binary

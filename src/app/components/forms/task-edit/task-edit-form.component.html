@@ -1,0 +1,15 @@
+<div class="form-container">
+  <div class="input-container">
+    <label for="name">Name</label><br />
+    <input name="name" [value]="name" (change)="handleChangeName($event)" />
+  </div>
+  <div class="input-container">
+    <label for="description">Description</label><br />
+    <textarea class="description-area" name="description" [value]="description" (change)="handleChangeDescription($event)"></textarea>
+  </div>
+</div>
+
+<div class="button-container">
+  <button class="nssd-button" [disabled]="!name" (click)="handleClickButton('save')">Save</button>
+  <button class="nssd-button" (click)="handleClickButton('close')">Close</button>
+</div>

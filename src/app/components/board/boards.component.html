@@ -1,0 +1,75 @@
+<div class="header-container">
+  <div class="board-message-text">
+    <p class="board-icon-text">
+      <i class="fa fas fa-clipboard fa-lg icon-cursor" role="button" title="Add another Board" (click)="handleIconClipboardClick()"></i>
+      Add Board
+    </p>
+    <p class="board-icon-text">
+      <i class="fa fas fa-download fa-lg icon-cursor" role="button" title="Save all Boards" (click)="handleIconDownloadAllClick()"></i>
+      Download Boards
+    </p>
+    <p class="board-icon-text">
+      <i class="fa fas fa-save fa-lg icon-cursor" role="button" title="Upload Boards" (click)="handleIconSaveAllClick()"></i>
+      Save Boards
+    </p>
+    <p class="board-icon-text">
+      <i class="fa fas {{hideArchivedBoards ? 'fa-eye' : 'fa-eye-slash'}} fa-lg icon-cursor"
+        role="button"
+        title="{{hideArchivedBoards ? 'Show Archived Boards' : 'Hide Archived Boards'}}"
+        (click)="handleIconHideClick()">
+      </i>
+      {{hideArchivedBoards ? 'Show Archived Boards' : 'Hide Archived Boards'}}
+    </p>
+  </div>
+</div>
+
+<ng-container *ngIf="!!boardsData">
+  <ng-container *ngFor="let board of boardsData">
+    <div *ngIf="((!!board) && (!!board.tasks) && ((!board.isArchived) || (!hideArchivedBoards)))" class="board-wrapper {{!isOpen[board.id] ? 'collapsed-wrapper' : ''}}">
+      <div class="board-title-container">
+        <h1 *ngIf="!!board.name">{{board.name}}</h1>
+        <div class="icon-container">
+          <i *ngIf="isOpen[board.id] && !board.isArchived"
+            class="fa fas fa-plus fa-2x icon-cursor"
+            role="button"
+            title="Add Task"
+            (click)="handleClickIconAdd(board.id)">
+          </i>
+          <i class="fa fas fa-minus fa-2x icon-cursor"
+            role="button"
+            title="{{isOpen[board.id] ? 'Collapse Board' : 'Expand Board'}}"
+            (click)="handleClickIconMinus(board.id)">
+          </i>
+          <i *ngIf="isOpen[board.id]"
+            class="fa fas fa-download fa-2x icon-cursor"
+            role="button"
+            title="Download Board"
+            (click)="handleClickIconSave(board.id)">
+          </i>
+          <i *ngIf="isOpen[board.id] || board.isArchived"
+            class="fa fas fa-archive fa-2x icon-cursor {{board.isArchived ? 'red' : ''}}"
+            role="button"
+            title="{{board.isArchived ? 'Unarchive Board' : 'Archive Board'}}"
+            (click)="handleClickIconArchive(board.id)">
+          </i>
+        </div>
+      </div>
+      <div class="board-container {{!isOpen[board.id] ? 'collapsed-container' : ''}}">
+        <ng-container *ngFor="let id of statuses">
+          <nssd-board-status-column
+            [isArchived]="board.isArchived"
+            [status]="id"
+            [tasks]="board.tasks"
+            (backClick)="handleButtonClickMoveTask($event, 'back', board.id)"
+            (forwardClick)="handleButtonClickMoveTask($event, 'forward', board.id)"
+            (infoClick)="handleIconClickInfo($event, board.id)"
+            (moveClick)="handleIconClickMove($event, board.id)"
+            (trashClick)="handleIconClickTrash($event, board.id)">
+          </nssd-board-status-column>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+
+<div kendoDialogContainer></div>

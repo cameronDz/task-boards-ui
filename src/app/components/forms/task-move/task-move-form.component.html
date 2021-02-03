@@ -1,0 +1,21 @@
+<div class="form-container">
+  <div *ngIf="((!!boards) && (!!boards.length))" class="id-container">
+    <p class="list-title">Board List</p>
+    <ng-container *ngFor="let board of boards">
+      <div *ngIf="((!!board) && (!!board.value) && (!!board.name))"
+        class="board-name"
+        role="button"
+        (click)="handleBoardClick(board.value)"
+      >
+        {{board.name}}
+      </div>
+    </ng-container>
+  </div>
+  <div *ngIf="((!boards) || (!boards.length))" class="no-ids-container">
+    No Boards to Move.
+  </div>
+</div>
+
+<div class="button-container">
+  <button class="nssd-button" (click)="handleCloseClick()">Close</button>
+</div>

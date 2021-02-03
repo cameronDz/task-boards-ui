@@ -1,0 +1,32 @@
+<div class="status-container">
+  <h2 *ngIf="!!name">{{name}}</h2>
+  <ng-container *ngFor="let task of tasks">
+    <div *ngIf="!!task && task.status === status" class="task-container">
+      <div class="task-details-container">
+        <p *ngIf="!!task.name" class="task-name">{{task.name}}</p>
+        <p *ngIf="!!task.description" class="task-description">{{task.description}}</p>
+      </div>
+      <div class="button-container">
+        <div class="icon-container">
+          <i class="fa fas fa-info-circle fa-lg {{isArchived ? 'disabled-cursor' : 'icon-cursor'}}" role="button" title="View Details" (click)="handleIconDetailsClick(task.id)"></i>
+          <i class="fa fas fa-trash fa-lg {{isArchived ? 'disabled-cursor' : 'icon-cursor'}}" role="button" title="Delete Task" (click)="handleIconDeleteClick(task.id)"></i>
+          <i class="fa fas fa-arrows fa-lg {{isArchived ? 'disabled-cursor' : 'icon-cursor'}}" role="button" title="Move Task to another Board" (click)="handleIconMoveClick(task.id)"></i>
+        </div>
+        <button
+          class="task-button {{((isArchived) || (status === 'created')) ? 'disabled-cursor' : ''}}"
+          [disabled]="((isArchived) || (status === 'created'))"
+          (click)="handleButtonBackClick(task.id)"
+        >
+          Back
+        </button>
+        <button
+          class="task-button {{((isArchived) || (status === 'completed')) ? 'disabled-cursor' : ''}}"
+          [disabled]="((isArchived) || (status === 'completed'))"
+          (click)="handleButtonForwardClick(task.id)"
+        >
+          Forward
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</div>

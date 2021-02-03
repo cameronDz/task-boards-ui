@@ -1,0 +1,79 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  margin: 0px;
+
+  h1, h2, h3, h4, h5, h6, p {
+    margin-block: 0px;
+  }
+
+  button {
+    background-color: white;
+    border: 2px solid black;
+    cursor: pointer;
+  }
+}
+
+.disabled-cursor {
+  cursor: not-allowed;
+}
+.icon-cursor {
+  cursor: pointer;
+}
+.red {
+  color: lightgray;
+}
+
+.button-container {
+  padding: 4px;
+  text-align: right;
+
+  .nssd-button {
+    margin-right: 8px;
+    width: 96px;
+  }
+}
+
+html body {
+  input, textarea {
+    margin: 4px 0px;
+    resize: none;
+    width: 100%;
+  }
+  label {
+    font-weight: 700;
+  }
+}
+
+/* kendo styling */
+.k-window {
+  border: 1px solid black;
+}
+.k-dialog-titlebar {
+  background-color: black;
+}
+
+/* max width of page */
+body .max-width-container {
+  margin: auto;
+  max-width: 1440px;
+}
+
+/* sticky footer */
+html, body {
+  height: 100%;
+
+  .app-container {
+    min-height: 100%;
+
+    .content {
+      padding-bottom: 36px;
+    }
+  }
+
+  .footer-container {
+    bottom: 0px;
+    margin-top: -36px;
+    max-height: 24px;
+  }
+}
