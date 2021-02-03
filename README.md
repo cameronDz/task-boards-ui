@@ -1,10 +1,8 @@
-# TODO-List UI #
+# Task Board UI #
 Project for maintaining task boards. Connected to S3/Heroku API for storing boards - no authentication implemented.
 
 # Angular Generated Documentation #
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
-
-# Angular Generated Documentation #
 
 ## Development server ##
 
