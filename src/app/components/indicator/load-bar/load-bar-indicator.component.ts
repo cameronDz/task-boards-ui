@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'nssd-load-bar-indicator',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./load-bar-indicator.component.scss']
 })
 export class LoadBarIndicatorComponent implements OnInit {
+
+    @Input() isLoading: boolean = false;
 
     constructor() {}
 

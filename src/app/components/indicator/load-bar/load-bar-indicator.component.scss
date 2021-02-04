@@ -1,0 +1,13 @@
+.load-container * {
+  max-height: 12px;
+  width: 100%;
+}
+
+.load-placeholder {
+  min-height: 12px;
+  width: 100%;
+}
+
+.load-placeholder, .load-container {
+  margin-bottom: 4px;
+}

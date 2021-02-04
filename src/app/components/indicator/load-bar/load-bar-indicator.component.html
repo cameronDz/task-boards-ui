@@ -1,1 +1,4 @@
-<p>load-bar-indicator works!</p>
+<div *ngIf="isLoading" class="load-container">
+  <kendo-progressbar [indeterminate]="true"></kendo-progressbar>
+</div>
+<div *ngIf="!isLoading" class="load-placeholder"></div>

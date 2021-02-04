@@ -1,1 +1,8 @@
-<p>load-circle-indicator works!</p>
+<div *ngIf="isLoading" class="load-container">
+  <kendo-loader
+      [type]="type"
+      [themeColor]="themeColor"
+      [size]="size"
+  >
+  </kendo-loader>
+</div>
