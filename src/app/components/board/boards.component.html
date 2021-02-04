@@ -23,6 +23,9 @@
   </div>
 </div>
 
+<nssd-load-circle-indicator *ngIf="((!boardsData) || (!boardsData.length))" [isLoading]="isLoading"></nssd-load-circle-indicator>
+<nssd-load-bar-indicator *ngIf="((!!boardsData) && (boardsData.length > 0))" [isLoading]="isLoading"></nssd-load-bar-indicator>
+
 <ng-container *ngIf="!!boardsData">
   <ng-container *ngFor="let board of boardsData">
     <div *ngIf="((!!board) && (!!board.tasks) && ((!board.isArchived) || (!hideArchivedBoards)))" class="board-wrapper {{!isOpen[board.id] ? 'collapsed-wrapper' : ''}}">

@@ -25,9 +25,11 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
 
     public boardsData: Array<TodoBoard> = null;
     public hideArchivedBoards: boolean = false;
-    public isLoadingAllBoards: boolean = false;
-    public isProcessingBoardSave: boolean = false;
+    public isLoading: boolean = false;
     public isOpen: object = {};
+
+    private isLoadingAllBoards: boolean = false;
+    private isProcessingBoardSave: boolean = false;
 
     private boardSubscription: Subscription = null;
     private saveSubscription: Subscription = null;
@@ -219,6 +221,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
 
     private saveBoardsToApi(): void {
         this.isProcessingBoardSave = true;
+        this.setIsLoading();
         this.saveSubscription = this.boardHttpService.saveAllBoards(
             this,
             { data: this.boardsData },
@@ -237,10 +240,12 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
 
     private saveBoardsCompletedCallback(self: BoardsComponent): void {
         self.isProcessingBoardSave = false;
+        self.setIsLoading();
     }
 
     private fetchBoardData(): void {
         this.isLoadingAllBoards = true;
+        this.setIsLoading();
         this.boardSubscription = this.boardHttpService.getAllBoards(
             this,
             this.allBoardsSuccessCallback,
@@ -262,6 +267,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
 
     private allBoardsCompletedCallback(self: BoardsComponent): void {
         self.isLoadingAllBoards = false;
+        self.setIsLoading();
     }
 
     private openAddBoardDialog(): void {
@@ -394,5 +400,9 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
                 SubscriptionUtility.unsubscribe(resultSubscription);
             });
         }
+    }
+
+    private setIsLoading(): void {
+        this.isLoading = ((this.isProcessingBoardSave) || (this.isLoadingAllBoards));
     }
 }
