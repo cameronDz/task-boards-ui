@@ -27,7 +27,7 @@
   <ng-container *ngFor="let board of boardsData">
     <div *ngIf="((!!board) && (!!board.tasks) && ((!board.isArchived) || (!hideArchivedBoards)))" class="board-wrapper {{!isOpen[board.id] ? 'collapsed-wrapper' : ''}}">
       <div class="board-title-container">
-        <h1 *ngIf="!!board.name">{{board.name}}</h1>
+        <h1 *ngIf="!!board.name" class="board-title">{{board.name}}</h1>
         <div class="icon-container">
           <i *ngIf="isOpen[board.id] && !board.isArchived"
             class="fa fas fa-plus fa-2x icon-cursor"
