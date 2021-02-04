@@ -274,6 +274,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         const dialogOptions: DialogSettings = {
             content: BoardEditFormComponent,
             height: 300,
+            maxWidth: '100%',
             title: 'Add Board',
             width: 460,
         };
@@ -303,6 +304,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
             const dialogOptions: DialogSettings = {
                 content: TaskEditFormComponent,
                 height: 300,
+                maxWidth: '100%',
                 title: 'Add Task to Board',
                 width: 460
             };
@@ -328,6 +330,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
             const dialogOptions: DialogSettings = {
                 content: TaskMoveFormComponent,
                 height: 300,
+                maxWidth: '100%',
                 title: 'Move Task to Different Board',
                 width: 460
             };
@@ -358,6 +361,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
             const dialogOptions: DialogSettings = {
                 content: TaskEditFormComponent,
                 height: 300,
+                maxWidth: '100%',
                 title: 'Update Task',
                 width: 460
             };
@@ -383,6 +387,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
             const dialogOptions: DialogSettings = {
                 content: TaskDeleteFormComponent,
                 height: 240,
+                maxWidth: '100%',
                 title: 'Confirm Task Delete',
                 width: 460
             };
