@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Load indicators for loading and saving boards
+
+### Changed
+- Basic page responsiveness for All board icons, board title bar
+- Padding on general app content within window
+
+### Fixed
+- Dialogs overflowing in mobile view
+- Board title bar icon issue on tablet/mobile view
+
 ## [1.0.0]  2021-02-03
 ### Added
 - Initial project functionality.
