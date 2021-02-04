@@ -14,6 +14,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { TaskDeleteFormComponent } from './components/forms/task-delete/task-delete-form.component';
 import { TaskEditFormComponent } from './components/forms/task-edit/task-edit-form.component';
 import { TaskMoveFormComponent } from './components/forms/task-move/task-move-form.component';
+import { LoadBarIndicatorComponent } from './components/indicator/load-bar/load-bar-indicator.component';
+import { LoadCircleIndicatorComponent } from './components/indicator/load-circle/load-circle-indicator.component';
 
 @NgModule({
     bootstrap: [
@@ -28,7 +30,9 @@ import { TaskMoveFormComponent } from './components/forms/task-move/task-move-fo
         HeaderComponent,
         TaskDeleteFormComponent,
         TaskEditFormComponent,
-        TaskMoveFormComponent
+        TaskMoveFormComponent,
+        LoadBarIndicatorComponent,
+        LoadCircleIndicatorComponent
     ],
     imports: [
         BrowserAnimationsModule,
