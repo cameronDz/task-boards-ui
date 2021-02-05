@@ -18,6 +18,7 @@ import { LoadCircleIndicatorComponent } from './components/indicator/load-circle
 import { TaskDeleteFormComponent } from './components/forms/task-delete/task-delete-form.component';
 import { TaskEditFormComponent } from './components/forms/task-edit/task-edit-form.component';
 import { TaskMoveFormComponent } from './components/forms/task-move/task-move-form.component';
+import { DateFormatterPipe } from './pipes/date-formatter.pipe';
 
 @NgModule({
     bootstrap: [
@@ -34,7 +35,8 @@ import { TaskMoveFormComponent } from './components/forms/task-move/task-move-fo
         LoadCircleIndicatorComponent,
         TaskDeleteFormComponent,
         TaskEditFormComponent,
-        TaskMoveFormComponent
+        TaskMoveFormComponent,
+        DateFormatterPipe
     ],
     imports: [
         BrowserAnimationsModule,
