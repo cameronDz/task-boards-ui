@@ -303,7 +303,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         if (boardIdx > -1) {
             const dialogOptions: DialogSettings = {
                 content: TaskEditFormComponent,
-                height: 300,
+                height: 324,
                 maxWidth: '100%',
                 title: 'Add Task to Board',
                 width: 460
@@ -360,7 +360,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         if (taskIdx >= 0) {
             const dialogOptions: DialogSettings = {
                 content: TaskEditFormComponent,
-                height: 300,
+                height: 324,
                 maxWidth: '100%',
                 title: 'Update Task',
                 width: 460

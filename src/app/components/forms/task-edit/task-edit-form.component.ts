@@ -13,6 +13,8 @@ export class TaskEditFormComponent implements OnInit {
     @Output() closeTodoTask: EventEmitter<void> = new EventEmitter<void>();
     @Output() saveTodoTask: EventEmitter<TodoTask> = new EventEmitter<TodoTask>();
 
+    public createdDate: Date = null;
+    public modifiedDate: Date = null;
     public description: string = '';
     public id: string = '';
     public name: string = '';

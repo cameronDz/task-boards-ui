@@ -7,6 +7,12 @@
     <label for="description">Description</label><br />
     <textarea class="description-area" name="description" [value]="description" (change)="handleChangeDescription($event)"></textarea>
   </div>
+  <div class="date-container">
+    <span class="date-title">Created: </span> {{createdDate | dateFormatter}}
+  </div>
+  <div class="date-container">
+    <span class="date-title">Last Modified: </span> {{modifiedDate | dateFormatter}}
+  </div>
 </div>
 
 <div class="button-container">
