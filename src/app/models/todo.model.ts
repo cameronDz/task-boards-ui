@@ -15,6 +15,8 @@ export class TodoTask {
         public id: string = '',
         public name: string = '',
         public description: string = '',
-        public status: string = '')
+        public status: string = '',
+        public createdDate: Date = new Date(),
+        public modifiedDate: Date = new Date())
     {}
 }
