@@ -168,6 +168,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
 
             if (!!newStatus) {
                 task.status = newStatus;
+                task.modifiedDate = new Date();
                 this.boardsData[boardIdx].tasks.splice(taskIdx, 1);
                 this.boardsData[boardIdx].tasks.unshift(task);
             }
@@ -339,9 +340,9 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
             const selectedSubscription: Subscription = dialogRef.content.instance.idSelected.subscribe((newId: string): void => {
                 const newBoardIdx: number = this.findBoardIndex(newId);
                 if (newBoardIdx > -1) {
-                    const todo: TodoTask = this.boardsData[boardIdx].tasks[taskIdx];
+                    const todo: TodoTask = this.boardsData[boardIdx].tasks.splice(taskIdx, 1)[0];
+                    todo.modifiedDate = new Date();
                     this.boardsData[newBoardIdx].tasks.push(todo);
-                    this.boardsData[boardIdx].tasks.splice(taskIdx, 1);
                 }
                 dialogRef.close();
             });
