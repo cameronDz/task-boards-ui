@@ -85,7 +85,7 @@ export class TaskEditFormComponent implements OnInit {
             }
             if (origTask.name !== newTask.name) {
                 if (!!description) {
-                    description += ' '
+                    description += ' ';
                 }
                 description += 'Changed name from: "' + origTask.name + '", to: "' + newTask.name + '".';
             }

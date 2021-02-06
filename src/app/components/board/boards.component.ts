@@ -180,7 +180,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
                 if (!Array.isArray(task.history)) {
                     task.history = [];
                 }
-                task.history.push(change)
+                task.history.push(change);
                 task.status = newStatus;
                 task.modifiedDate = new Date();
                 this.boardsData[boardIdx].tasks.splice(taskIdx, 1);

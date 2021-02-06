@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Basic page responsiveness for All board icons, board title bar
 - Padding on general app content within window
+- Browser tab Title and Favicon to match Homepage favicon and app name
 
 ### Fixed
 - Dialogs overflowing in mobile view
