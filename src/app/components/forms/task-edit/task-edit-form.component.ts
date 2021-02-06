@@ -17,6 +17,7 @@ export class TaskEditFormComponent implements OnInit {
     public modifiedDate: Date = null;
     public description: string = '';
     public id: string = '';
+    public isNewTodo: boolean = false;
     public name: string = '';
     public status: string = '';
 
@@ -49,20 +50,26 @@ export class TaskEditFormComponent implements OnInit {
 
     private setTaskValues(): void {
         if (!!this.task) {
-            const { description, id, name, status } = this.task;
+            const { createdDate, description, id, modifiedDate, name, status } = this.task;
+            this.createdDate = createdDate;
             this.description = description;
             this.id = id;
+            this.modifiedDate = modifiedDate;
             this.name = name;
             this.status = status;
         } else {
             this.id = 'new-task-' + new Date().getTime();
             this.status = 'created';
+            this.isNewTodo = true;
         }
     }
 
     private createTask(): TodoTask {
-        const { description, id, name, status } = this;
-        return new TodoTask(id, name, description, status);
+        const { createdDate, description, id, isNewTodo, name, status } = this;
+        const modifiedDate: Date = new Date();
+        const todoCreatedDate: Date = isNewTodo ? modifiedDate : createdDate;
+        const newTask: TodoTask = new TodoTask(id, name, description, status, todoCreatedDate, modifiedDate);
+        return newTask;
     }
 
     private emitClose(): void {
