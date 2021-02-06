@@ -1,0 +1,11 @@
+<div *ngIf="!!change" class="change-container">
+  <p>{{change.date | dateFormatter}} - </p>
+  <p class="change-details">
+    <span *ngIf="!!change.name" class="title">{{change.name}}</span>
+    <span *ngIf="!change.name" class="title">N/A</span>
+    <span *ngIf="!!change.description" class="subtitle">: {{change.description}}</span>
+  </p>
+</div>
+<div *ngIf="!change">
+  {{noChangeToDisplay}}
+</div>

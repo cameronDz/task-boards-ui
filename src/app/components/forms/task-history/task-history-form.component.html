@@ -1,7 +1,7 @@
 <div class="history-container">
   <div *ngIf="((!!history) && (history.length > 0))" class="list-area">
-    <ng-container *ngFor="change of history">
-
+    <ng-container *ngFor="let change of history">
+      <nssd-task-history-change-display *ngIf="!!change" [change]="change"></nssd-task-history-change-display>
     </ng-container>
   </div>
   <div *ngIf="((!history) || (!(history.length > 0)))">

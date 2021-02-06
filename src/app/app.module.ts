@@ -21,6 +21,7 @@ import { TaskEditFormComponent } from './components/forms/task-edit/task-edit-fo
 import { TaskHistoryFormComponent } from './components/forms/task-history/task-history-form.component';
 import { TaskMoveFormComponent } from './components/forms/task-move/task-move-form.component';
 import { TaskStatusPipe } from './pipes/task-status.pipe';
+import { TaskHistoryChangeDisplayComponent } from './components/forms/task-history/change-display/task-history-change-display.component';
 
 @NgModule({
     bootstrap: [
@@ -38,9 +39,10 @@ import { TaskStatusPipe } from './pipes/task-status.pipe';
         LoadCircleIndicatorComponent,
         TaskDeleteFormComponent,
         TaskEditFormComponent,
+        TaskHistoryChangeDisplayComponent,
+        TaskHistoryFormComponent,
         TaskMoveFormComponent,
-        TaskStatusPipe,
-        TaskHistoryFormComponent
+        TaskStatusPipe
     ],
     imports: [
         BrowserAnimationsModule,

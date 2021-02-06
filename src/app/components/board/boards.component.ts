@@ -354,7 +354,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
                 height: 320,
                 maxWidth: '100%',
                 title: 'Task History',
-                width: 460
+                width: 560
             };
             const dialogRef: DialogRef = this.dialogService.open(dialogOptions);
             dialogRef.content.instance.history = this.boardsData[boardIdx].tasks[taskIdx].history;
