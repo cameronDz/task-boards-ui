@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Load indicators for loading and saving boards
+- Create and modifed dates to Tasks
 
 ### Changed
 - Basic page responsiveness for All board icons, board title bar
