@@ -1,5 +1,5 @@
 <div class="status-container">
-  <h2 *ngIf="!!name">{{name}}</h2>
+  <h2 *ngIf="!!status">{{status | taskStatus}}</h2>
   <ng-container *ngFor="let task of tasks">
     <div *ngIf="!!task && task.status === status" class="task-container">
       <div class="task-details-container">

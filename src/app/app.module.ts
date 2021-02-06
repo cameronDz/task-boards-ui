@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { BoardEditFormComponent } from './components/forms/board-edit/board-edit-form.component';
 import { BoardsComponent } from './components/board/boards.component';
 import { BoardStatusColumnComponent } from './components/board/status-column/board-status-column.component';
+import { DateFormatterPipe } from './pipes/date-formatter.pipe';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LoadBarIndicatorComponent } from './components/indicator/load-bar/load-bar-indicator.component';
@@ -18,7 +19,7 @@ import { LoadCircleIndicatorComponent } from './components/indicator/load-circle
 import { TaskDeleteFormComponent } from './components/forms/task-delete/task-delete-form.component';
 import { TaskEditFormComponent } from './components/forms/task-edit/task-edit-form.component';
 import { TaskMoveFormComponent } from './components/forms/task-move/task-move-form.component';
-import { DateFormatterPipe } from './pipes/date-formatter.pipe';
+import { TaskStatusPipe } from './pipes/task-status.pipe';
 
 @NgModule({
     bootstrap: [
@@ -29,6 +30,7 @@ import { DateFormatterPipe } from './pipes/date-formatter.pipe';
         BoardEditFormComponent,
         BoardsComponent,
         BoardStatusColumnComponent,
+        DateFormatterPipe,
         FooterComponent,
         HeaderComponent,
         LoadBarIndicatorComponent,
@@ -36,7 +38,7 @@ import { DateFormatterPipe } from './pipes/date-formatter.pipe';
         TaskDeleteFormComponent,
         TaskEditFormComponent,
         TaskMoveFormComponent,
-        DateFormatterPipe
+        TaskStatusPipe
     ],
     imports: [
         BrowserAnimationsModule,
@@ -45,6 +47,9 @@ import { DateFormatterPipe } from './pipes/date-formatter.pipe';
         HttpClientModule,
         LoaderModule,
         ProgressBarModule
+    ],
+    providers: [
+        TaskStatusPipe
     ]
 })
 export class AppModule {}

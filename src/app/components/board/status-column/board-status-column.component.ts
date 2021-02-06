@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TodoTask } from '../../../models/todo.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { TodoTask } from '../../../models/todo.model';
     templateUrl: './board-status-column.component.html',
     styleUrls: ['./board-status-column.component.scss']
 })
-export class BoardStatusColumnComponent implements OnChanges, OnInit {
+export class BoardStatusColumnComponent implements OnInit {
 
     @Input() isArchived: boolean = false;
     @Input() status: string = '';
@@ -18,25 +18,9 @@ export class BoardStatusColumnComponent implements OnChanges, OnInit {
     @Output() moveClick: EventEmitter<string> = new EventEmitter<string>();
     @Output() trashClick: EventEmitter<string> = new EventEmitter<string>();
 
-    public name: string = '';
-
     constructor() {}
 
     ngOnInit(): void {}
-
-    ngOnChanges(changes: SimpleChanges): void {
-        if (!!changes) {
-            if (this.status === 'created') {
-                this.name = 'Created';
-            } else if (this.status === 'started') {
-                this.name = 'Started';
-            } else if (this.status === 'reviewing') {
-                this.name = 'Reviewing';
-            } else if (this.status === 'completed') {
-                this.name = 'Completed';
-            }
-        }
-    }
 
     public handleIconMoveClick(id: string): void {
         this.emitEvent(this.moveClick, id);
