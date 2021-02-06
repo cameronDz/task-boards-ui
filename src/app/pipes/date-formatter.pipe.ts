@@ -10,7 +10,7 @@ export class DateFormatterPipe implements PipeTransform {
     private convertValidDate(value: Date): string {
         const yyyyMM: string = value.getFullYear() + '/' + this.getTwoDigitString(value.getMonth() + 1) + '/';
         const ddhh: string =  this.getTwoDigitString(value.getDate()) + ' ' + this.getTwoDigitString(value.getHours()) + ':';
-        const mmss: string = this.getTwoDigitString(value.getMinutes()); + ':' + this.getTwoDigitString(value.getSeconds());
+        const mmss: string = this.getTwoDigitString(value.getMinutes()) + ':' + this.getTwoDigitString(value.getSeconds());
         return yyyyMM + ddhh + mmss;
     }
 
