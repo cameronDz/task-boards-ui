@@ -1,0 +1,14 @@
+.history-container {
+  min-height: 100%;
+  padding-bottom: -32px;
+
+  .list-area {
+    height: 84px;
+    overflow-y: auto;
+  }
+}
+
+.button-container {
+  margin-top: -32px;
+  text-align: right;
+}

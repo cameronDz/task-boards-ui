@@ -10,6 +10,7 @@ import { NameValue } from '../../models/name-value.model';
 import { SubscriptionUtility } from '../../utilities/subscription.utility';
 import { TaskDeleteFormComponent } from '../forms/task-delete/task-delete-form.component';
 import { TaskEditFormComponent } from '../forms/task-edit/task-edit-form.component';
+import { TaskHistoryFormComponent } from '../forms/task-history/task-history-form.component';
 import { TaskMoveFormComponent } from '../forms/task-move/task-move-form.component';
 import { TaskStatusPipe } from '../../pipes/task-status.pipe';
 import { TodoBoard, TodoChange, TodoChangeName, TodoTask } from '../../models/todo.model';
@@ -349,8 +350,8 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
     private openHistoryDialog(boardIdx: number = -1, taskIdx: number = -1): void {
         if (taskIdx >= 0) {
             const dialogOptions: DialogSettings = {
-                content: '',
-                height: 300,
+                content: TaskHistoryFormComponent,
+                height: 320,
                 maxWidth: '100%',
                 title: 'Task History',
                 width: 460

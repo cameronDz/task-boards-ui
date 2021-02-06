@@ -18,6 +18,7 @@ import { LoadBarIndicatorComponent } from './components/indicator/load-bar/load-
 import { LoadCircleIndicatorComponent } from './components/indicator/load-circle/load-circle-indicator.component';
 import { TaskDeleteFormComponent } from './components/forms/task-delete/task-delete-form.component';
 import { TaskEditFormComponent } from './components/forms/task-edit/task-edit-form.component';
+import { TaskHistoryFormComponent } from './components/forms/task-history/task-history-form.component';
 import { TaskMoveFormComponent } from './components/forms/task-move/task-move-form.component';
 import { TaskStatusPipe } from './pipes/task-status.pipe';
 
@@ -38,7 +39,8 @@ import { TaskStatusPipe } from './pipes/task-status.pipe';
         TaskDeleteFormComponent,
         TaskEditFormComponent,
         TaskMoveFormComponent,
-        TaskStatusPipe
+        TaskStatusPipe,
+        TaskHistoryFormComponent
     ],
     imports: [
         BrowserAnimationsModule,

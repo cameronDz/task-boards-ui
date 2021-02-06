@@ -1,0 +1,13 @@
+<div class="history-container">
+  <div *ngIf="((!!history) && (history.length > 0))" class="list-area">
+    <ng-container *ngFor="change of history">
+
+    </ng-container>
+  </div>
+  <div *ngIf="((!history) || (!(history.length > 0)))">
+    <p class="subtitle">{{noHistoryDisplay}}</p>
+  </div>
+</div>
+<div class="button-container">
+  <button class="nssd-button" (click)="handleClickButtonClose()">Close</button>
+</div>
