@@ -9,9 +9,10 @@ import { DownloadUtility } from '../../utilities/download.utility';
 import { NameValue } from '../../models/name-value.model';
 import { SubscriptionUtility } from '../../utilities/subscription.utility';
 import { TaskDeleteFormComponent } from '../forms/task-delete/task-delete-form.component';
-import { TaskMoveFormComponent } from '../forms/task-move/task-move-form.component';
 import { TaskEditFormComponent } from '../forms/task-edit/task-edit-form.component';
-import { TodoBoard, TodoTask } from '../../models/todo.model';
+import { TaskMoveFormComponent } from '../forms/task-move/task-move-form.component';
+import { TaskStatusPipe } from '../../pipes/task-status.pipe';
+import { TodoBoard, TodoChange, TodoChangeName, TodoTask } from '../../models/todo.model';
 
 @Component({
     selector: 'nssd-boards',
@@ -36,7 +37,8 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
 
     constructor(
             private boardHttpService: BoardHttpService,
-            private dialogService: DialogService) {
+            private dialogService: DialogService,
+            private taskStatusPipe: TaskStatusPipe) {
         super();
     }
 
@@ -167,12 +169,24 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
             }
 
             if (!!newStatus) {
+                const change: TodoChange = this.getTaskMoveChange(task.status, newStatus);
+                if (!Array.isArray(task.history)) {
+                    task.history = [];
+                }
+                task.history.push(change)
                 task.status = newStatus;
                 task.modifiedDate = new Date();
                 this.boardsData[boardIdx].tasks.splice(taskIdx, 1);
                 this.boardsData[boardIdx].tasks.unshift(task);
             }
         }
+    }
+
+    private getTaskMoveChange(originalStatus: string, newStatus: string): TodoChange {
+        const orgValue: string = this.taskStatusPipe.transform(originalStatus);
+        const newValue: string = this.taskStatusPipe.transform(newStatus);
+        const description: string = 'Move status from ' + orgValue + ' to ' + newValue + '.';
+        return new TodoChange(TodoChangeName.MOVE_STATUS, description, new Date());
     }
 
     private findBoardIndex(boardId: string): number {
@@ -342,6 +356,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
                 if (newBoardIdx > -1) {
                     const todo: TodoTask = this.boardsData[boardIdx].tasks.splice(taskIdx, 1)[0];
                     todo.modifiedDate = new Date();
+                    todo.history = this.addMoveTaskBoardHistory(todo, this.boardsData[boardIdx].name, this.boardsData[newBoardIdx].name);
                     this.boardsData[newBoardIdx].tasks.push(todo);
                 }
                 dialogRef.close();
@@ -355,6 +370,14 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
                 SubscriptionUtility.unsubscribe(resultSubscription);
             });
         }
+    }
+
+    private addMoveTaskBoardHistory(task: TodoTask, origBoard: string, newBoard: string): Array<TodoChange> {
+        const history: Array<TodoChange> = ((!!task) && (Array.isArray(task.history))) ? task.history : [];
+        const description: string = 'Moved Task from Board: ' + origBoard + ', to: ' + newBoard + '.';
+        const change: TodoChange = new TodoChange(TodoChangeName.MOVE_BOARD, description, task.modifiedDate);
+        history.push(change);
+        return history;
     }
 
     private openUpdateTaskDialog(boardIdx: number = -1, taskIdx: number = -1): void {

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TodoTask } from '../../../models/todo.model';
+import { TodoChange, TodoChangeName, TodoTask } from '../../../models/todo.model';
 
 @Component({
     selector: 'nssd-task-edit-form',
@@ -16,6 +16,7 @@ export class TaskEditFormComponent implements OnInit {
     public createdDate: Date = null;
     public modifiedDate: Date = null;
     public description: string = '';
+    public history: Array<TodoChange> = [];
     public id: string = '';
     public isNewTodo: boolean = false;
     public name: string = '';
@@ -50,9 +51,10 @@ export class TaskEditFormComponent implements OnInit {
 
     private setTaskValues(): void {
         if (!!this.task) {
-            const { createdDate, description, id, modifiedDate, name, status } = this.task;
+            const { createdDate, description, history, id, modifiedDate, name, status } = this.task;
             this.createdDate = createdDate;
             this.description = description;
+            this.history = history;
             this.id = id;
             this.modifiedDate = modifiedDate;
             this.name = name;
@@ -65,11 +67,33 @@ export class TaskEditFormComponent implements OnInit {
     }
 
     private createTask(): TodoTask {
-        const { createdDate, description, id, isNewTodo, name, status } = this;
+        const { createdDate, description, history, id, isNewTodo, name, status } = this;
         const modifiedDate: Date = new Date();
         const todoCreatedDate: Date = isNewTodo ? modifiedDate : createdDate;
-        const newTask: TodoTask = new TodoTask(id, name, description, status, todoCreatedDate, modifiedDate);
+        const newTask: TodoTask = new TodoTask(id, name, description, status, todoCreatedDate, modifiedDate, history);
+        newTask.history = this.setNewTaskHistory(newTask, this.task);
         return newTask;
+    }
+
+    private setNewTaskHistory(newTask: TodoTask, origTask: TodoTask): Array<TodoChange> {
+        const history: Array<TodoChange> = ((!!newTask) && (Array.isArray(newTask.history))) ? newTask.history : [];
+        const change: TodoChange = new TodoChange(TodoChangeName.CREATED, '', new Date());
+        if (!!origTask) {
+            let description: string = '';
+            if (origTask.description !== newTask.description) {
+                description = 'Changed description from: "' + origTask.description + '", to: "' + newTask.description + '".';
+            }
+            if (origTask.name !== newTask.name) {
+                if (!!description) {
+                    description += ' '
+                }
+                description += 'Changed name from: "' + origTask.name + '", to: "' + newTask.name + '".';
+            }
+            change.description = description;
+            change.name = TodoChangeName.MODIFIED_DETAILS;
+        }
+        history.push(change);
+        return history;
     }
 
     private emitClose(): void {
