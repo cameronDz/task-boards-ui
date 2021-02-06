@@ -11,6 +11,7 @@
           <i class="fa fas fa-info-circle fa-lg {{isArchived ? 'disabled-cursor' : 'icon-cursor'}}" role="button" title="View Details" (click)="handleIconDetailsClick(task.id)"></i>
           <i class="fa fas fa-trash fa-lg {{isArchived ? 'disabled-cursor' : 'icon-cursor'}}" role="button" title="Delete Task" (click)="handleIconDeleteClick(task.id)"></i>
           <i class="fa fas fa-arrows fa-lg {{isArchived ? 'disabled-cursor' : 'icon-cursor'}}" role="button" title="Move Task to another Board" (click)="handleIconMoveClick(task.id)"></i>
+          <i class="fa fas fa-history fa-lg icon-cursor" role="button" title="View Task History" (click)="handleIconHistoryClick(task.id)"></i>
         </div>
         <button
           class="task-button {{((isArchived) || (status === 'created')) ? 'disabled-cursor' : ''}}"

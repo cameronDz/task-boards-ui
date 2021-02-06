@@ -110,6 +110,12 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         }
     }
 
+    public handeIconClickHistory(taskId: string, boardId: string): void {
+        const boardIdx: number = this.findBoardIndex(boardId);
+        const taskIdx: number = this.findTaskIndex(taskId, boardIdx);
+        this.openHistoryDialog(boardIdx, taskIdx);
+    }
+
     public handleIconClickInfo(taskId: string, boardId: string): void {
         const boardIdx: number = this.findBoardIndex(boardId);
         const taskIdx: number = this.findTaskIndex(taskId, boardIdx);
@@ -334,6 +340,27 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
             });
             const resultSubscription: Subscription = dialogRef.result.subscribe((): void => {
                 SubscriptionUtility.unsubscribe(saveSubscription);
+                SubscriptionUtility.unsubscribe(closeSubscription);
+                SubscriptionUtility.unsubscribe(resultSubscription);
+            });
+        }
+    }
+
+    private openHistoryDialog(boardIdx: number = -1, taskIdx: number = -1): void {
+        if (taskIdx >= 0) {
+            const dialogOptions: DialogSettings = {
+                content: '',
+                height: 300,
+                maxWidth: '100%',
+                title: 'Task History',
+                width: 460
+            };
+            const dialogRef: DialogRef = this.dialogService.open(dialogOptions);
+            dialogRef.content.instance.history = this.boardsData[boardIdx].tasks[taskIdx].history;
+            const closeSubscription: Subscription = dialogRef.content.instance.closeClick.subscribe((): void => {
+                dialogRef.close();
+            });
+            const resultSubscription: Subscription = dialogRef.result.subscribe((): void => {
                 SubscriptionUtility.unsubscribe(closeSubscription);
                 SubscriptionUtility.unsubscribe(resultSubscription);
             });

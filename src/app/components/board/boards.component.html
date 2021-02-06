@@ -65,6 +65,7 @@
             [tasks]="board.tasks"
             (backClick)="handleButtonClickMoveTask($event, 'back', board.id)"
             (forwardClick)="handleButtonClickMoveTask($event, 'forward', board.id)"
+            (historyClick)="handeIconClickHistory($event, board.id)"
             (infoClick)="handleIconClickInfo($event, board.id)"
             (moveClick)="handleIconClickMove($event, board.id)"
             (trashClick)="handleIconClickTrash($event, board.id)">
