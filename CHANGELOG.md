@@ -6,6 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] 2021-02-06
 ### Added
 - Load indicators for loading and saving boards
 - Create and modifed dates to Tasks
@@ -20,6 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dialogs overflowing in mobile view
 - Board title bar icon issue on tablet/mobile view
 
-## [1.0.0]  2021-02-03
+## [1.0.0] 2021-02-03
 ### Added
 - Initial project functionality.
