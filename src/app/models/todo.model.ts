@@ -26,7 +26,7 @@ export class TodoChange {
     constructor(
         public name: TodoChangeName = TodoChangeName.NONE,
         public description: string = '',
-        public date: Date = new Date()) {}
+        public date: Date = null) {}
 }
 
 export enum TodoChangeName {
@@ -36,4 +36,14 @@ export enum TodoChangeName {
     MOVE_BOARD = 'Move Task Board',
     MOVE_STATUS = 'Move Task Status',
     MOVE_PRIORITY = 'Move Task Priority'
+}
+
+export class TodoOptions {
+
+    constructor(public isHidingBoards: boolean = false) {}
+}
+
+export class TodoPayload {
+
+    constructor(public boards: Array<TodoBoard> = [], public options: TodoOptions = null) {}
 }
