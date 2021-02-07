@@ -28,11 +28,11 @@
 
 <ng-container *ngIf="!!boardsData">
   <ng-container *ngFor="let board of boardsData">
-    <div *ngIf="((!!board) && (!!board.tasks) && ((!board.isArchived) || (!hideArchivedBoards)))" class="board-wrapper {{!isOpen[board.id] ? 'collapsed-wrapper' : ''}}">
+    <div *ngIf="((!!board) && (!!board.tasks) && ((!board.isArchived) || (!hideArchivedBoards)))" class="board-wrapper {{!board.isOpen ? 'collapsed-wrapper' : ''}}">
       <div class="board-title-container">
         <h1 *ngIf="!!board.name" class="board-title">{{board.name}}</h1>
         <div class="icon-container">
-          <i *ngIf="isOpen[board.id] && !board.isArchived"
+          <i *ngIf="((board.isOpen) && (!board.isArchived))"
             class="fa fas fa-plus fa-2x icon-cursor"
             role="button"
             title="Add Task"
@@ -40,16 +40,16 @@
           </i>
           <i class="fa fas fa-minus fa-2x icon-cursor"
             role="button"
-            title="{{isOpen[board.id] ? 'Collapse Board' : 'Expand Board'}}"
+            title="{{board.isOpen ? 'Collapse Board' : 'Expand Board'}}"
             (click)="handleClickIconMinus(board.id)">
           </i>
-          <i *ngIf="isOpen[board.id]"
+          <i *ngIf="board.isOpen"
             class="fa fas fa-download fa-2x icon-cursor"
             role="button"
             title="Download Board"
             (click)="handleClickIconSave(board.id)">
           </i>
-          <i *ngIf="isOpen[board.id] || board.isArchived"
+          <i *ngIf="board.isOpen || board.isArchived"
             class="fa fas fa-archive fa-2x icon-cursor {{board.isArchived ? 'red' : ''}}"
             role="button"
             title="{{board.isArchived ? 'Unarchive Board' : 'Archive Board'}}"
@@ -57,7 +57,7 @@
           </i>
         </div>
       </div>
-      <div class="board-container {{!isOpen[board.id] ? 'collapsed-container' : ''}}">
+      <div class="board-container {{!board.isOpen ? 'collapsed-container' : ''}}">
         <ng-container *ngFor="let id of statuses">
           <nssd-board-status-column
             [isArchived]="board.isArchived"

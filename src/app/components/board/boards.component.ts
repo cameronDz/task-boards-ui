@@ -28,7 +28,6 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
     public boardsData: Array<TodoBoard> = null;
     public hideArchivedBoards: boolean = false;
     public isLoading: boolean = false;
-    public isOpen: object = {};
 
     private isLoadingAllBoards: boolean = false;
     private isProcessingBoardSave: boolean = false;
@@ -62,7 +61,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         if (boardIdx >= 0) {
             this.boardsData[boardIdx].isArchived = !this.boardsData[boardIdx].isArchived;
             if (this.boardsData[boardIdx].isArchived) {
-                this.isOpen[this.boardsData[boardIdx].id] = false;
+                this.boardsData[boardIdx].isOpen = false;
             }
             this.moveArchivedBoards();
         }
@@ -78,7 +77,6 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         }
         if (!!newBoard) {
             this.boardsData.unshift(newBoard);
-            this.isOpen[newBoard.id] = true;
         }
     }
 
@@ -87,7 +85,10 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
     }
 
     public handleClickIconMinus(boardId: string): void {
-        this.isOpen[boardId] = !this.isOpen[boardId];
+        const boardIdx: number = this.findBoardIndex(boardId);
+        if (boardIdx >= 0) {
+            this.boardsData[boardIdx].isOpen = !this.boardsData[boardIdx].isOpen;
+        }
     }
 
     public handleClickIconSave(boardId: string): void {
@@ -232,15 +233,6 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         }
     }
 
-    private openBoards(): void {
-        const length: number = !this.boardsData ? -1 : this.boardsData.length;
-        for (let idx: number = 0; idx < length; idx++) {
-            if ((!!this.boardsData[idx]) && (!!this.boardsData[idx].id)) {
-                this.isOpen[this.boardsData[idx].id] = !this.boardsData[idx].isArchived;
-            }
-        }
-    }
-
     private saveBoardsToApi(): void {
         this.isProcessingBoardSave = true;
         this.setIsLoading();
@@ -279,7 +271,6 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         if (!!data && !!data.payload) {
             self.boardsData = data.payload.data;
             self.moveArchivedBoards();
-            self.openBoards();
         }
     }
 
@@ -307,7 +298,6 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
                     this.boardsData = [];
                 }
                 this.boardsData.unshift(board);
-                this.isOpen[board.id] = true;
             }
             dialogRef.close();
         });
