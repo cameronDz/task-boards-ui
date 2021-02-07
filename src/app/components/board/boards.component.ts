@@ -59,7 +59,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
                 for (let idx: number = boardIdx + 1; idx < length; idx++) {
                     if ((!!this.boardsData[idx]) && ((!this.hideArchivedBoards) || (!this.boardsData[idx].isArchived))) {
                         const temp: TodoBoard = this.boardsData[idx];
-                        this.boardsData[idx] = this.boardsData[boardIdx]
+                        this.boardsData[idx] = this.boardsData[boardIdx];
                         this.boardsData[boardIdx] = temp;
                         break;
                     }
@@ -76,7 +76,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
                 for (let idx: number = boardIdx - 1; idx >= 0; idx--) {
                     if ((!!this.boardsData[idx]) && ((!this.hideArchivedBoards) || (!this.boardsData[idx].isArchived))) {
                         const temp: TodoBoard = this.boardsData[idx];
-                        this.boardsData[idx] = this.boardsData[boardIdx]
+                        this.boardsData[idx] = this.boardsData[boardIdx];
                         this.boardsData[boardIdx] = temp;
                         break;
                     }
