@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-    public readonly title: string = 'Task Boards';
-    public readonly subtitle: string = 'Create Task boards with related tasks for; daily activities, projects, and goals.';
+    public readonly title: string = 'Task Boards UI';
+    public readonly subtitle: string = 'Tracking for various activities, projects, and goals.';
 
     constructor() {}
 
