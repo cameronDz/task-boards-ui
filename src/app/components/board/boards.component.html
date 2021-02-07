@@ -43,6 +43,16 @@
             title="{{board.isOpen ? 'Collapse Board' : 'Expand Board'}}"
             (click)="handleClickIconMinus(board.id)">
           </i>
+          <i class="fa fas fa-arrow-up fa-2x {{isLoading ? 'disabled-cursor' : 'icon-cursor'}}"
+            role="button"
+            title="Move Board Up"
+            (click)="handleClickIconUp(board.id)">
+          </i>
+          <i class="fa fas fa-arrow-down fa-2x {{isLoading ? 'disabled-cursor' : 'icon-cursor'}}"
+            role="button"
+            title="Move Board Down"
+            (click)="handleClickIconDown(board.id)">
+          </i>
           <i *ngIf="board.isOpen"
             class="fa fas fa-download fa-2x {{isLoading ? 'disabled-cursor' : 'icon-cursor'}}"
             role="button"

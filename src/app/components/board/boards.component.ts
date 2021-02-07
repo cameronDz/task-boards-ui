@@ -51,6 +51,40 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         SubscriptionUtility.unsubscribe(this.saveSubscription);
     }
 
+    public handleClickIconDown(boardId: string): void {
+        if ((!!this.boardsData) && (!this.isLoading)) {
+            const { length } = this.boardsData;
+            const boardIdx: number = this.findBoardIndex(boardId);
+            if ((length > 1) && (boardIdx < length - 1)) {
+                for (let idx: number = boardIdx + 1; idx < length; idx++) {
+                    if ((!!this.boardsData[idx]) && ((!this.hideArchivedBoards) || (!this.boardsData[idx].isArchived))) {
+                        const temp: TodoBoard = this.boardsData[idx];
+                        this.boardsData[idx] = this.boardsData[boardIdx]
+                        this.boardsData[boardIdx] = temp;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public handleClickIconUp(boardId: string): void {
+        if ((!!this.boardsData) && (!this.isLoading)) {
+            const { length } = this.boardsData;
+            const boardIdx: number = this.findBoardIndex(boardId);
+            if ((length > 1) && (boardIdx !== 0)) {
+                for (let idx: number = boardIdx - 1; idx >= 0; idx--) {
+                    if ((!!this.boardsData[idx]) && ((!this.hideArchivedBoards) || (!this.boardsData[idx].isArchived))) {
+                        const temp: TodoBoard = this.boardsData[idx];
+                        this.boardsData[idx] = this.boardsData[boardIdx]
+                        this.boardsData[boardIdx] = temp;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
     public handleClickIconAdd(boardId: string): void {
         if (!this.isLoading) {
             const boardIdx: number = this.findBoardIndex(boardId);
@@ -66,7 +100,6 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
                 if (this.boardsData[boardIdx].isArchived) {
                     this.boardsData[boardIdx].isOpen = false;
                 }
-                this.moveArchivedBoards();
             }
         }
     }
@@ -271,22 +304,6 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         this.boardsData[boardIdx].tasks[taskIdx] = task;
     }
 
-    private moveArchivedBoards(): void {
-        const archviedIndexes: Array<number> = [];
-        const totalLength: number = !this.boardsData ? -1 : this.boardsData.length;
-        for (let idx: number = 0; idx < totalLength; idx++) {
-            if ((!!this.boardsData[idx]) && (this.boardsData[idx].isArchived)) {
-                archviedIndexes.push(idx);
-            }
-        }
-        const archivedLength: number = archviedIndexes.length;
-        for (let idx: number = 0; idx < archivedLength; idx++) {
-            const splicedIdx: number = archviedIndexes.pop();
-            const splicedBoard: TodoBoard = this.boardsData.splice(splicedIdx, 1)[0];
-            this.boardsData.push(splicedBoard);
-        }
-    }
-
     private saveBoardsToApi(): void {
         this.isProcessingBoardSave = true;
         this.setIsLoading();
@@ -325,7 +342,6 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         if (!!data && !!data.payload) {
             self.boardsData = data.payload.boards;
             self.hideArchivedBoards = ((!!data.payload.options) && (data.payload.options.isHidingBoards));
-            self.moveArchivedBoards();
         }
     }
 

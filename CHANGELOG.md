@@ -7,13 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Task prioritization icons
+- Prioritization for boards and tasks
 - Disabled actions when loading or saving
 - Storing hiding archived board options in saved data
 - Loading padding for empty boards for mobile view
 
 ### Changed
 - Switch "Back"/"Forward" buttons on Tasks with Left/Right arrow icons
+- No longer automatically move archived boards to be at the bottom of board list
 - Saving when board is expanded or collapsed
 - Styling and verbiage in header
 
