@@ -64,11 +64,13 @@
             [status]="id"
             [tasks]="board.tasks"
             (backClick)="handleButtonClickMoveTask($event, 'back', board.id)"
+            (downClick)="handleIconMoveTaskPriority($event, 'down', board.id)"
             (forwardClick)="handleButtonClickMoveTask($event, 'forward', board.id)"
             (historyClick)="handeIconClickHistory($event, board.id)"
             (infoClick)="handleIconClickInfo($event, board.id)"
             (moveClick)="handleIconClickMove($event, board.id)"
-            (trashClick)="handleIconClickTrash($event, board.id)">
+            (trashClick)="handleIconClickTrash($event, board.id)"
+            (upClick)="handleIconMoveTaskPriority($event, 'up', board.id)">
           </nssd-board-status-column>
         </ng-container>
       </div>

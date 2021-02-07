@@ -15,10 +15,12 @@
           </i>
         </p>
         <p class="icon-container center-icon">
+          <i class="fa fas fa-arrow-up fa-lg {{isArchived ? 'disabled-cursor' : 'icon-cursor'}}" role="button" title="Move Task Up" (click)="handleIconUpClick(task.id)"></i>
           <i class="fa fas fa-info-circle fa-lg {{isArchived ? 'disabled-cursor' : 'icon-cursor'}}" role="button" title="View Details" (click)="handleIconDetailsClick(task.id)"></i>
           <i class="fa fas fa-history fa-lg icon-cursor" role="button" title="View Task History" (click)="handleIconHistoryClick(task.id)"></i>
           <i class="fa fas fa-arrows fa-lg {{isArchived ? 'disabled-cursor' : 'icon-cursor'}}" role="button" title="Move Task to another Board" (click)="handleIconMoveClick(task.id)"></i>
           <i class="fa fas fa-trash fa-lg {{isArchived ? 'disabled-cursor' : 'icon-cursor'}}" role="button" title="Delete Task" (click)="handleIconDeleteClick(task.id)"></i>
+          <i class="fa fas fa-arrow-down fa-lg {{isArchived ? 'disabled-cursor' : 'icon-cursor'}}" role="button" title="Move Task Down" (click)="handleIconDownClick(task.id)"></i>
         </p>
         <p class="icon-container right-icon">
           <i class="fa fas fa-arrow-circle-right fa-2x {{((isArchived) || (status === 'completed')) ? 'disabled-cursor' : 'icon-cursor'}}"

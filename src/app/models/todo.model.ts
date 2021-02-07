@@ -34,5 +34,6 @@ export enum TodoChangeName {
     CREATED = 'Task Created',
     MODIFIED_DETAILS = 'Task Details Modified',
     MOVE_BOARD = 'Move Task Board',
-    MOVE_STATUS = 'Move Task Status'
+    MOVE_STATUS = 'Move Task Status',
+    MOVE_PRIORITY = 'Move Task Priority'
 }

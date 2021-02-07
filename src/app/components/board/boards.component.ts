@@ -152,6 +152,49 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         }
     }
 
+    public handleIconMoveTaskPriority(taskId: string, direction: string, boardId: string = ''): void {
+        const boardIdx: number = this.findBoardIndex(boardId);
+        const taskIdx: number = this.findTaskIndex(taskId, boardIdx);
+        const task: TodoTask = ((boardIdx >= 0) && (taskIdx >= 0)) ? this.boardsData[boardIdx].tasks[taskIdx] : null;
+        if ((taskIdx >= 0) && (!!task)) {
+            let change: TodoChange = null;
+            const { length } = this.boardsData[boardIdx].tasks;
+            if (length > 1) {
+                const { status } = this.boardsData[boardIdx].tasks[taskIdx];
+                if ((direction === 'up') && (taskIdx !== 0)) {
+                    for (let idx: number = taskIdx - 1; idx >= 0; idx--) {
+                        if ((!!this.boardsData[boardIdx].tasks[idx]) && (status === this.boardsData[boardIdx].tasks[idx].status)) {
+                            this.swapTasks(boardIdx, taskIdx, idx);
+                            change = new TodoChange(TodoChangeName.MOVE_PRIORITY, 'Move Task Priority Up', new Date());
+                            break;
+                        }
+                    }
+                } else if ((direction === 'down') && (taskIdx !== length - 1)) {
+                    for (let idx: number = taskIdx + 1; idx < length; idx++) {
+                        if ((!!this.boardsData[boardIdx].tasks[idx]) && (status === this.boardsData[boardIdx].tasks[idx].status)) {
+                            this.swapTasks(boardIdx, taskIdx, idx);
+                            change = new TodoChange(TodoChangeName.MOVE_PRIORITY, 'Move Task Priority Down', new Date());
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (!!change) {
+                if (!Array.isArray(task.history)) {
+                    task.history = [];
+                }
+                task.history.push(change);
+            }
+        }
+    }
+
+    private swapTasks(boardIdx: number, taskIdxOne: number, taskIdxTwo): void {
+        const temp: TodoTask = this.boardsData[boardIdx].tasks[taskIdxOne];
+        this.boardsData[boardIdx].tasks[taskIdxOne] = this.boardsData[boardIdx].tasks[taskIdxTwo];
+        this.boardsData[boardIdx].tasks[taskIdxTwo] = temp;
+    }
+
     public handleButtonClickMoveTask(taskId: string, direction: string, boardId: string = ''): void {
         const boardIdx: number = this.findBoardIndex(boardId);
         const taskIdx: number = this.findTaskIndex(taskId, boardIdx);

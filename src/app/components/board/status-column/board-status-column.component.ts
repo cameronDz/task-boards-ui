@@ -13,11 +13,13 @@ export class BoardStatusColumnComponent implements OnInit {
     @Input() tasks: Array<TodoTask> = null;
 
     @Output() backClick: EventEmitter<string> = new EventEmitter<string>();
+    @Output() downClick: EventEmitter<string> = new EventEmitter<string>();
     @Output() forwardClick: EventEmitter<string> = new EventEmitter<string>();
     @Output() historyClick: EventEmitter<string> = new EventEmitter<string>();
     @Output() infoClick: EventEmitter<string> = new EventEmitter<string>();
     @Output() moveClick: EventEmitter<string> = new EventEmitter<string>();
     @Output() trashClick: EventEmitter<string> = new EventEmitter<string>();
+    @Output() upClick: EventEmitter<string> = new EventEmitter<string>();
 
     constructor() {}
 
@@ -27,6 +29,14 @@ export class BoardStatusColumnComponent implements OnInit {
         if ((!!id) && (!!this.historyClick)) {
             this.historyClick.emit(id);
         }
+    }
+
+    public handleIconDownClick(id: string): void {
+        this.emitEvent(this.downClick, id);
+    }
+
+    public handleIconUpClick(id: string): void {
+        this.emitEvent(this.upClick, id);
     }
 
     public handleIconMoveClick(id: string): void {
