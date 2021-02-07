@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Add loading padding for empty boards
+
 ## [1.1.0] 2021-02-06
 ### Added
 - Load indicators for loading and saving boards
