@@ -322,7 +322,6 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
     }
 
     private allBoardsSuccessCallback(self: BoardsComponent, data: { payload: TodoPayload }): void {
-        console.log('data', data);
         if (!!data && !!data.payload) {
             self.boardsData = data.payload.boards;
             self.hideArchivedBoards = ((!!data.payload.options) && (data.payload.options.isHidingBoards));
