@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Task prioritization icons
 - Disabled actions when loading or saving
+- Storing hiding archived board options in saved data
 - Loading padding for empty boards for mobile view
 
 ### Changed

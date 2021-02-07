@@ -13,7 +13,7 @@ import { TaskEditFormComponent } from '../forms/task-edit/task-edit-form.compone
 import { TaskHistoryFormComponent } from '../forms/task-history/task-history-form.component';
 import { TaskMoveFormComponent } from '../forms/task-move/task-move-form.component';
 import { TaskStatusPipe } from '../../pipes/task-status.pipe';
-import { TodoBoard, TodoChange, TodoChangeName, TodoTask } from '../../models/todo.model';
+import { TodoBoard, TodoChange, TodoChangeName, TodoOptions, TodoPayload, TodoTask } from '../../models/todo.model';
 
 @Component({
     selector: 'nssd-boards',
@@ -292,7 +292,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         this.setIsLoading();
         this.saveSubscription = this.boardHttpService.saveAllBoards(
             this,
-            { data: this.boardsData },
+            new TodoPayload(this.boardsData, new TodoOptions(this.hideArchivedBoards)),
             this.saveBoardsSuccessCallback,
             this.saveBoardsErrorCallback,
             this.saveBoardsCompletedCallback);
@@ -321,9 +321,11 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
             this.allBoardsCompletedCallback);
     }
 
-    private allBoardsSuccessCallback(self: BoardsComponent, data: any): void {
+    private allBoardsSuccessCallback(self: BoardsComponent, data: { payload: TodoPayload }): void {
+        console.log('data', data);
         if (!!data && !!data.payload) {
-            self.boardsData = data.payload.data;
+            self.boardsData = data.payload.boards;
+            self.hideArchivedBoards = ((!!data.payload.options) && (data.payload.options.isHidingBoards));
             self.moveArchivedBoards();
         }
     }
