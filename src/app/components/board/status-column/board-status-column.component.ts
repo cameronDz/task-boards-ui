@@ -9,6 +9,7 @@ import { TodoTask } from '../../../models/todo.model';
 export class BoardStatusColumnComponent implements OnInit {
 
     @Input() isArchived: boolean = false;
+    @Input() isLoading: boolean = false;
     @Input() status: string = '';
     @Input() tasks: Array<TodoTask> = null;
 
@@ -63,7 +64,7 @@ export class BoardStatusColumnComponent implements OnInit {
      * action not emitted when task is archived
      */
     private emitEvent(emitter: EventEmitter<string>, id: string): void {
-        if ((!this.isArchived) && (!!id) && (!!emitter)) {
+        if ((!this.isArchived) && (!this.isLoading) && (!!id) && (!!emitter)) {
             emitter.emit(id);
         }
     }

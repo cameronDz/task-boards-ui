@@ -52,62 +52,65 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
     }
 
     public handleClickIconAdd(boardId: string): void {
-        const boardIdx: number = this.findBoardIndex(boardId);
-        this.openAddTaskDialog(boardIdx);
+        if (!this.isLoading) {
+            const boardIdx: number = this.findBoardIndex(boardId);
+            this.openAddTaskDialog(boardIdx);
+        }
     }
 
     public handleClickIconArchive(boardId: string): void {
-        const boardIdx: number = this.findBoardIndex(boardId);
-        if (boardIdx >= 0) {
-            this.boardsData[boardIdx].isArchived = !this.boardsData[boardIdx].isArchived;
-            if (this.boardsData[boardIdx].isArchived) {
-                this.boardsData[boardIdx].isOpen = false;
+        if (!this.isLoading) {
+            const boardIdx: number = this.findBoardIndex(boardId);
+            if (boardIdx >= 0) {
+                this.boardsData[boardIdx].isArchived = !this.boardsData[boardIdx].isArchived;
+                if (this.boardsData[boardIdx].isArchived) {
+                    this.boardsData[boardIdx].isOpen = false;
+                }
+                this.moveArchivedBoards();
             }
-            this.moveArchivedBoards();
         }
     }
 
     public handleIconHideClick(): void {
-        this.hideArchivedBoards = !this.hideArchivedBoards;
-    }
-
-    public handleSaveBoardForm(newBoard: TodoBoard): void {
-        if (!Array.isArray(this.boardsData)) {
-            this.boardsData = [];
-        }
-        if (!!newBoard) {
-            this.boardsData.unshift(newBoard);
+        if (!this.isLoading) {
+            this.hideArchivedBoards = !this.hideArchivedBoards;
         }
     }
 
     public handleIconClipboardClick(): void {
-        this.openAddBoardDialog();
+        if (!this.isLoading) {
+            this.openAddBoardDialog();
+        }
     }
 
     public handleClickIconMinus(boardId: string): void {
-        const boardIdx: number = this.findBoardIndex(boardId);
-        if (boardIdx >= 0) {
-            this.boardsData[boardIdx].isOpen = !this.boardsData[boardIdx].isOpen;
+        if (!this.isLoading) {
+            const boardIdx: number = this.findBoardIndex(boardId);
+            if (boardIdx >= 0) {
+                this.boardsData[boardIdx].isOpen = !this.boardsData[boardIdx].isOpen;
+            }
         }
     }
 
     public handleClickIconSave(boardId: string): void {
-        const idx: number = this.findBoardIndex(boardId);
-        if ((idx >= 0) && (this.boardsData[idx])) {
-            const { name } = this.boardsData[idx];
-            const filename = DownloadUtility.filenameSafeString(name);
-            DownloadUtility.downloadJsonData(filename, this.boardsData[idx]);
+        if (!this.isLoading) {
+            const idx: number = this.findBoardIndex(boardId);
+            if ((idx >= 0) && (this.boardsData[idx])) {
+                const { name } = this.boardsData[idx];
+                const filename = DownloadUtility.filenameSafeString(name);
+                DownloadUtility.downloadJsonData(filename, this.boardsData[idx]);
+            }
         }
     }
 
     public handleIconDownloadAllClick(): void {
-        if (!!this.boardsData) {
+        if ((!this.isLoading) && (!!this.boardsData)) {
             const filename = 'all-board-data';
             DownloadUtility.downloadJsonData(filename, this.boardsData);
         }
     }
     public handleIconSaveAllClick(): void {
-        if (!!this.boardsData) {
+        if ((!this.isLoading) && (!!this.boardsData)) {
             this.saveBoardsToApi();
         }
     }
@@ -119,15 +122,19 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
     }
 
     public handleIconClickInfo(taskId: string, boardId: string): void {
-        const boardIdx: number = this.findBoardIndex(boardId);
-        const taskIdx: number = this.findTaskIndex(taskId, boardIdx);
-        this.openUpdateTaskDialog(boardIdx, taskIdx);
+        if (!this.isLoading) {
+            const boardIdx: number = this.findBoardIndex(boardId);
+            const taskIdx: number = this.findTaskIndex(taskId, boardIdx);
+            this.openUpdateTaskDialog(boardIdx, taskIdx);
+        }
     }
 
     public handleIconClickMove(taskId: string, boardId: string): void {
-        const boardIdx: number = this.findBoardIndex(boardId);
-        const taskIdx: number = this.findTaskIndex(taskId, boardIdx);
-        this.openMoveTaskDialog(boardIdx, taskIdx);
+        if (!this.isLoading) {
+            const boardIdx: number = this.findBoardIndex(boardId);
+            const taskIdx: number = this.findTaskIndex(taskId, boardIdx);
+            this.openMoveTaskDialog(boardIdx, taskIdx);
+        }
     }
 
     public getBoardNameValuePairs(excludedIdxs: Array<number> = []): Array<NameValue> {
@@ -145,21 +152,23 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
     }
 
     public handleIconClickTrash(taskId: string, boardId: string = ''): void {
-        const boardIdx: number = this.findBoardIndex(boardId);
-        const taskIdx: number = this.findTaskIndex(taskId, boardIdx);
-        if (taskIdx >= 0) {
-            this.openDeleteDialog(boardIdx, taskIdx);
+        if (!this.isLoading) {
+            const boardIdx: number = this.findBoardIndex(boardId);
+            const taskIdx: number = this.findTaskIndex(taskId, boardIdx);
+            if (taskIdx >= 0) {
+                this.openDeleteDialog(boardIdx, taskIdx);
+            }
         }
     }
 
     public handleIconMoveTaskPriority(taskId: string, direction: string, boardId: string = ''): void {
-        const boardIdx: number = this.findBoardIndex(boardId);
-        const taskIdx: number = this.findTaskIndex(taskId, boardIdx);
-        const task: TodoTask = ((boardIdx >= 0) && (taskIdx >= 0)) ? this.boardsData[boardIdx].tasks[taskIdx] : null;
-        if ((taskIdx >= 0) && (!!task)) {
-            let change: TodoChange = null;
+        if (!this.isLoading) {
+            const boardIdx: number = this.findBoardIndex(boardId);
+            const taskIdx: number = this.findTaskIndex(taskId, boardIdx);
+            const task: TodoTask = ((boardIdx >= 0) && (taskIdx >= 0)) ? this.boardsData[boardIdx].tasks[taskIdx] : null;
             const { length } = this.boardsData[boardIdx].tasks;
-            if (length > 1) {
+            if ((length > 1) && (taskIdx >= 0) && (!!task)) {
+                let change: TodoChange = null;
                 const { status } = this.boardsData[boardIdx].tasks[taskIdx];
                 if ((direction === 'up') && (taskIdx !== 0)) {
                     for (let idx: number = taskIdx - 1; idx >= 0; idx--) {
@@ -178,13 +187,13 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
                         }
                     }
                 }
-            }
 
-            if (!!change) {
-                if (!Array.isArray(task.history)) {
-                    task.history = [];
+                if (!!change) {
+                    if (!Array.isArray(task.history)) {
+                        task.history = [];
+                    }
+                    task.history.push(change);
                 }
-                task.history.push(change);
             }
         }
     }
@@ -196,39 +205,41 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
     }
 
     public handleButtonClickMoveTask(taskId: string, direction: string, boardId: string = ''): void {
-        const boardIdx: number = this.findBoardIndex(boardId);
-        const taskIdx: number = this.findTaskIndex(taskId, boardIdx);
-        const task: TodoTask = ((boardIdx >= 0) && (taskIdx >= 0)) ? this.boardsData[boardIdx].tasks[taskIdx] : null;
-        if ((taskIdx >= 0) && (!!task)) {
-            let newStatus: string = '';
-            if ((task.status === 'created') && (direction === 'forward')) {
-                newStatus = 'started';
-            } else if (task.status === 'reviewing') {
-                if (direction === 'forward') {
-                    newStatus = 'completed';
-                } else if (direction === 'back') {
+        if (!this.isLoading) {
+            const boardIdx: number = this.findBoardIndex(boardId);
+            const taskIdx: number = this.findTaskIndex(taskId, boardIdx);
+            const task: TodoTask = ((boardIdx >= 0) && (taskIdx >= 0)) ? this.boardsData[boardIdx].tasks[taskIdx] : null;
+            if ((taskIdx >= 0) && (!!task)) {
+                let newStatus: string = '';
+                if ((task.status === 'created') && (direction === 'forward')) {
                     newStatus = 'started';
-                }
-            } else if (task.status === 'started') {
-                if (direction === 'forward') {
+                } else if (task.status === 'reviewing') {
+                    if (direction === 'forward') {
+                        newStatus = 'completed';
+                    } else if (direction === 'back') {
+                        newStatus = 'started';
+                    }
+                } else if (task.status === 'started') {
+                    if (direction === 'forward') {
+                        newStatus = 'reviewing';
+                    } else if (direction === 'back') {
+                        newStatus = 'created';
+                    }
+                } else if ((task.status === 'completed') && (direction === 'back')) {
                     newStatus = 'reviewing';
-                } else if (direction === 'back') {
-                    newStatus = 'created';
                 }
-            } else if ((task.status === 'completed') && (direction === 'back')) {
-                newStatus = 'reviewing';
-            }
 
-            if (!!newStatus) {
-                const change: TodoChange = this.getTaskMoveChange(task.status, newStatus);
-                if (!Array.isArray(task.history)) {
-                    task.history = [];
+                if (!!newStatus) {
+                    const change: TodoChange = this.getTaskMoveChange(task.status, newStatus);
+                    if (!Array.isArray(task.history)) {
+                        task.history = [];
+                    }
+                    task.history.push(change);
+                    task.status = newStatus;
+                    task.modifiedDate = new Date();
+                    this.boardsData[boardIdx].tasks.splice(taskIdx, 1);
+                    this.boardsData[boardIdx].tasks.unshift(task);
                 }
-                task.history.push(change);
-                task.status = newStatus;
-                task.modifiedDate = new Date();
-                this.boardsData[boardIdx].tasks.splice(taskIdx, 1);
-                this.boardsData[boardIdx].tasks.unshift(task);
             }
         }
     }

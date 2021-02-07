@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Task prioritization icons
-- Loading padding for empty boards
+- Disabled actions when loading or saving
+- Loading padding for empty boards for mobile view
 
 ### Changed
 - Switch "Back"/"Forward" buttons on Tasks with Left/Right arrow icons
