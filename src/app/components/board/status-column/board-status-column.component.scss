@@ -49,10 +49,28 @@
   }
 }
 
-.icon-container {
-  display: inline-block;
-  margin-right: 8px;
-  * {
-    margin-right: 4px;
+.icon-bar-container {
+  padding-top: 8px;
+  width: 100%;
+
+  .icon-container * {
+    margin-right: 6px;
+  }
+
+  .center-icon {
+    float: left;
+    margin-top: 6px;
+    text-align: center;
+    width: 33.33%;
+  }
+  .left-icon {
+    float: left;
+    text-align: left;
+    width: 33.33%;
+  }
+  .right-icon {
+    float: right;
+    text-align: right;
+    width: 33.33%;
   }
 }

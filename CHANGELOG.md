@@ -6,8 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Loading padding for empty boards
+
 ### Changed
-- Add loading padding for empty boards
+- Switch "Back"/"Forward" buttons on Tasks with Left/Right arrow icons
 
 ## [1.1.0] 2021-02-06
 ### Added
