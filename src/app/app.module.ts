@@ -14,6 +14,7 @@ import { BoardStatusColumnComponent } from './components/board/status-column/boa
 import { DateFormatterPipe } from './pipes/date-formatter.pipe';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { IconComponent } from './components/icon/icon.component';
 import { LoadBarIndicatorComponent } from './components/indicator/load-bar/load-bar-indicator.component';
 import { LoadCircleIndicatorComponent } from './components/indicator/load-circle/load-circle-indicator.component';
 import { TaskDeleteFormComponent } from './components/forms/task-delete/task-delete-form.component';
@@ -35,6 +36,7 @@ import { TaskHistoryChangeDisplayComponent } from './components/forms/task-histo
         DateFormatterPipe,
         FooterComponent,
         HeaderComponent,
+        IconComponent,
         LoadBarIndicatorComponent,
         LoadCircleIndicatorComponent,
         TaskDeleteFormComponent,
