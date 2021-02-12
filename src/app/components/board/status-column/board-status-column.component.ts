@@ -8,56 +8,65 @@ import { TodoTask } from '../../../models/todo.model';
 })
 export class BoardStatusColumnComponent implements OnInit {
 
+    public readonly centerIcons: Array<{ title: string, type: string}> = [
+        { title: 'Move Task Up', type: 'arrow-up'},
+        { title: 'View Details', type: 'info-circle'},
+        { title: 'View Task History', type: 'history'},
+        { title: 'Move Task to another Board', type: 'arrows'},
+        { title: 'Delete Task', type: 'trash'},
+        { title: 'Move Task Down', type: 'arrow-down'}
+    ];
+
+    @Input() disabledLoadingMessage: string = 'Disabled';
     @Input() isArchived: boolean = false;
     @Input() isLoading: boolean = false;
     @Input() status: string = '';
     @Input() tasks: Array<TodoTask> = null;
 
-    @Output() backClick: EventEmitter<string> = new EventEmitter<string>();
-    @Output() downClick: EventEmitter<string> = new EventEmitter<string>();
-    @Output() forwardClick: EventEmitter<string> = new EventEmitter<string>();
-    @Output() historyClick: EventEmitter<string> = new EventEmitter<string>();
-    @Output() infoClick: EventEmitter<string> = new EventEmitter<string>();
-    @Output() moveClick: EventEmitter<string> = new EventEmitter<string>();
-    @Output() trashClick: EventEmitter<string> = new EventEmitter<string>();
-    @Output() upClick: EventEmitter<string> = new EventEmitter<string>();
+    @Output() clickedBack: EventEmitter<string> = new EventEmitter<string>();
+    @Output() clickedDown: EventEmitter<string> = new EventEmitter<string>();
+    @Output() clickedForward: EventEmitter<string> = new EventEmitter<string>();
+    @Output() clickedHistory: EventEmitter<string> = new EventEmitter<string>();
+    @Output() clickedInfo: EventEmitter<string> = new EventEmitter<string>();
+    @Output() clickedMove: EventEmitter<string> = new EventEmitter<string>();
+    @Output() clickedTrash: EventEmitter<string> = new EventEmitter<string>();
+    @Output() clickedUp: EventEmitter<string> = new EventEmitter<string>();
 
     constructor() {}
 
     ngOnInit(): void {}
 
-    public handleIconHistoryClick(id: string): void {
-        if ((!!id) && (!!this.historyClick)) {
-            this.historyClick.emit(id);
+    public handleClickedIcon(type: string, id: string) {
+        switch (type) {
+            case ('arrows'):
+                this.emitEvent(this.clickedMove, id);
+                break;
+            case ('arrow-down'):
+                this.emitEvent(this.clickedDown, id);
+                break;
+            case ('arrow-up'):
+                this.emitEvent(this.clickedUp, id);
+                break;
+            case ('history'):
+                this.emitEvent(this.clickedHistory, id);
+                break;
+            case ('info-circle'):
+                this.emitEvent(this.clickedInfo, id);
+                break;
+            case ('trash'):
+                this.emitEvent(this.clickedTrash, id);
+                break;
+            default:
+                // do nothing
         }
     }
 
-    public handleIconDownClick(id: string): void {
-        this.emitEvent(this.downClick, id);
+    public handleClickedIconBack(id: string): void {
+        this.emitEvent(this.clickedBack, id);
     }
 
-    public handleIconUpClick(id: string): void {
-        this.emitEvent(this.upClick, id);
-    }
-
-    public handleIconMoveClick(id: string): void {
-        this.emitEvent(this.moveClick, id);
-    }
-
-    public handleIconDeleteClick(id: string): void {
-        this.emitEvent(this.trashClick, id);
-    }
-
-    public handleIconDetailsClick(id: string): void {
-        this.emitEvent(this.infoClick, id);
-    }
-
-    public handleButtonBackClick(id: string): void {
-        this.emitEvent(this.backClick, id);
-    }
-
-    public handleButtonForwardClick(id: string): void {
-        this.emitEvent(this.forwardClick, id);
+    public handleClickedIconForward(id: string): void {
+        this.emitEvent(this.clickedForward, id);
     }
 
     /**

@@ -22,6 +22,9 @@ import { TodoBoard, TodoChange, TodoChangeName, TodoOptions, TodoPayload, TodoTa
 })
 export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit {
 
+    public readonly disabledLoadingMessage: string = 'Disabled';
+    public readonly hideArchivedBoardMessage: string = 'Hide Archived Boards';
+    public readonly showArchivedBoardMessage: string = 'Show Archived Boards';
     public readonly statuses: Array<string> = ['created', 'started', 'reviewing', 'completed'];
     private readonly errorMessage: string = 'Error occured:';
 
