@@ -2,47 +2,47 @@
   <div class="board-message-text">
     <p class="board-icon-text">
       <nssd-icon
-        [disabledTitle]="disabledLoadingMessage"
+        [disabledTitle]="messageDisableTitle"
         [isDisabled]="isLoading"
         [size]="'lg'"
         [title]="'Add another Board'"
         [type]="'clipboard'"
-        (clickedIcon)="handleIconClipboardClick()">
+        (clickedIcon)="handleClickedAddBoard()">
       </nssd-icon>
       Add Board
     </p>
     <p class="board-icon-text">
       <nssd-icon
-        [disabledTitle]="disabledLoadingMessage"
+        [disabledTitle]="messageDisableTitle"
         [isDisabled]="isLoading"
         [size]="'lg'"
         [title]="'Save all Boards'"
         [type]="'download'"
-        (clickedIcon)="handleIconDownloadAllClick()">
+        (clickedIcon)="handleClickedDownloadAll()">
       </nssd-icon>
       Download Boards
     </p>
     <p class="board-icon-text">
       <nssd-icon
-        [disabledTitle]="disabledLoadingMessage"
+        [disabledTitle]="messageDisableTitle"
         [isDisabled]="isLoading"
         [size]="'lg'"
         [title]="'Upload Boards'"
         [type]="'save'"
-        (clickedIcon)="handleIconSaveAllClick()">
+        (clickedIcon)="handleClickedUploadAll()">
       </nssd-icon>
       Save Boards
     </p>
     <p class="board-icon-text">
       <nssd-icon
-        [disabledTitle]="disabledLoadingMessage"
+        [disabledTitle]="messageDisableTitle"
         [isDisabled]="isLoading"
         [size]="'lg'"
-        [title]="hideArchivedBoards ? showArchivedBoardMessage : hideArchivedBoardMessage"
+        [title]="hideArchivedBoards ? messageShowArchivedBoard : messageHideArchivedBoard"
         [type]="hideArchivedBoards ? 'eye' : 'eye-slash'"
-        (clickedIcon)="handleIconHideClick()">
+        (clickedIcon)="handleClickedHideShowArchivedBoards()">
       </nssd-icon>
-      {{hideArchivedBoards ? showArchivedBoardMessage : hideArchivedBoardMessage}}
+      {{hideArchivedBoards ? messageShowArchivedBoard : messageHideArchivedBoard}}
     </p>
   </div>
 </div>
@@ -57,75 +57,75 @@
         <h1 *ngIf="!!board.name" class="board-title">{{board.name}}</h1>
         <div class="icon-container">
           <nssd-icon
-            [disabledTitle]="disabledLoadingMessage"
+            [disabledTitle]="messageDisableTitle"
             [isDisabled]="isLoading"
             [isShown]="((board.isOpen) && (!board.isArchived))"
             [size]="'2x'"
             [title]="'Add Task'"
             [type]="'plus'"
-            (clickedIcon)="handleClickIconAdd(board.id)">
+            (clickedIcon)="handleClickedBoardAddTask(board.id)">
           </nssd-icon>
           <nssd-icon
-            [disabledTitle]="disabledLoadingMessage"
+            [disabledTitle]="messageDisableTitle"
             [isDisabled]="isLoading"
             [size]="'2x'"
             [title]="board.isOpen ? 'Collapse Board' : 'Expand Board'"
             [type]="'minus'"
-            (clickedIcon)="handleClickIconMinus(board.id)">
+            (clickedIcon)="handleClickedBoardHideShow(board.id)">
           </nssd-icon>
           <nssd-icon
-            [disabledTitle]="disabledLoadingMessage"
+            [disabledTitle]="messageDisableTitle"
             [isDisabled]="isLoading"
             [size]="'2x'"
             [title]="'Move Board Up'"
             [type]="'arrow-up'"
-            (clickedIcon)="handleClickIconUp(board.id)">
+            (clickedIcon)="handleClickedBoardUp(board.id)">
           </nssd-icon>
           <nssd-icon
-            [disabledTitle]="disabledLoadingMessage"
+            [disabledTitle]="messageDisableTitle"
             [isDisabled]="isLoading"
             [size]="'2x'"
             [title]="'Move Board Down'"
             [type]="'arrow-down'"
-            (clickedIcon)="handleClickIconDown(board.id)">
+            (clickedIcon)="handleClickedBoardDown(board.id)">
           </nssd-icon>
           <nssd-icon
-            [disabledTitle]="disabledLoadingMessage"
+            [disabledTitle]="messageDisableTitle"
             [isDisabled]="isLoading"
             [isShown]="board.isOpen"
             [size]="'2x'"
             [title]="'Download Board'"
             [type]="'download'"
-            (clickedIcon)="handleClickIconSave(board.id)">
+            (clickedIcon)="handleClickedBoardDownload(board.id)">
           </nssd-icon>
           <nssd-icon
-            [disabledTitle]="disabledLoadingMessage"
+            [disabledTitle]="messageDisableTitle"
             [isDisabled]="isLoading"
             [isShown]="((board.isOpen) || (board.isArchived))"
             [size]="'2x'"
             [title]="board.isArchived ? 'Unarchive Board' : 'Archive Board'"
             [type]="'archive'"
             [wildCardClasses]="board.isArchived ? 'color-lightgray' : ''"
-            (clickedIcon)="handleClickIconArchive(board.id)">
+            (clickedIcon)="handleClickedBoardArchive(board.id)">
           </nssd-icon>
         </div>
       </div>
       <div class="board-container {{!board.isOpen ? 'collapsed-container' : ''}}">
         <ng-container *ngFor="let id of statuses">
           <nssd-board-status-column
-            [disabledLoadingMessage]="disabledLoadingMessage"
+            [disabledLoadingMessage]="messageDisableTitle"
             [isArchived]="board.isArchived"
             [isLoading]="isLoading"
             [status]="id"
             [tasks]="board.tasks"
-            (clickedBack)="handleButtonClickMoveTask($event, 'back', board.id)"
-            (clickedDown)="handleIconMoveTaskPriority($event, 'down', board.id)"
-            (clickedForward)="handleButtonClickMoveTask($event, 'forward', board.id)"
-            (clickedHistory)="handeIconClickHistory($event, board.id)"
-            (clickedInfo)="handleIconClickInfo($event, board.id)"
-            (clickedMove)="handleIconClickMove($event, board.id)"
-            (clickedTrash)="handleIconClickTrash($event, board.id)"
-            (clickedUp)="handleIconMoveTaskPriority($event, 'up', board.id)">
+            (clickedBack)="handleClickedTaskMoveStatus($event, 'back', board.id)"
+            (clickedDown)="handleClickedTaskMovePrioritze($event, 'down', board.id)"
+            (clickedForward)="handleClickedTaskMoveStatus($event, 'forward', board.id)"
+            (clickedHistory)="handleClickedTaskHistory($event, board.id)"
+            (clickedInfo)="handleClickedTaskInfo($event, board.id)"
+            (clickedMove)="handleClickedTaskMoveBoard($event, board.id)"
+            (clickedTrash)="handleClickedTaskDelete($event, board.id)"
+            (clickedUp)="handleClickedTaskMovePrioritze($event, 'up', board.id)">
           </nssd-board-status-column>
         </ng-container>
       </div>
