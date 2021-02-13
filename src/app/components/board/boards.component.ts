@@ -8,12 +8,13 @@ import { BoardHttpService } from '../../services/board-http.service';
 import { DownloadUtility } from '../../utilities/download.utility';
 import { NameValue } from '../../models/name-value.model';
 import { SubscriptionUtility } from '../../utilities/subscription.utility';
+import { TaskCommentFormComponent } from '../forms/task-comment/task-comment-form.component';
 import { TaskDeleteFormComponent } from '../forms/task-delete/task-delete-form.component';
 import { TaskEditFormComponent } from '../forms/task-edit/task-edit-form.component';
 import { TaskHistoryFormComponent } from '../forms/task-history/task-history-form.component';
 import { TaskMoveFormComponent } from '../forms/task-move/task-move-form.component';
 import { TaskStatusPipe } from '../../pipes/task-status.pipe';
-import { TodoBoard, TodoChange, TodoChangeName, TodoOptions, TodoPayload, TodoTask } from '../../models/todo.model';
+import { TodoBoard, TodoChange, TodoChangeName, TodoComment, TodoOptions, TodoPayload, TodoTask } from '../../models/todo.model';
 
 @Component({
     selector: 'nssd-boards',
@@ -445,7 +446,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
     private openCommentDialog(boardIdx: number = -1, taskIdx: number = -1): void {
         if (taskIdx >= 0) {
             const dialogOptions: DialogSettings = {
-                content: '',
+                content: TaskCommentFormComponent,
                 height: 320,
                 maxWidth: '100%',
                 title: 'Task Comments',
@@ -454,7 +455,18 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
             const dialogRef: DialogRef = this.dialogService.open(dialogOptions);
             dialogRef.content.instance.comments = this.boardsData[boardIdx].tasks[taskIdx].comments;
             dialogRef.content.instance.isReadOnly = this.boardsData[boardIdx].isArchived;
-            const closeSubscription: Subscription = dialogRef.content.instance.closeClick.subscribe((): void => {
+            const saveSubscription: Subscription = dialogRef.content.instance.clickedSavedComment.subscribe((comment: TodoComment): void => {
+                if (!Array.isArray(this.boardsData[boardIdx].tasks[taskIdx].comments)) {
+                    this.boardsData[boardIdx].tasks[taskIdx].comments = [];
+                }
+                this.boardsData[boardIdx].tasks[taskIdx].comments.push(comment);
+                if (!Array.isArray(this.boardsData[boardIdx].tasks[taskIdx].history)) {
+                    this.boardsData[boardIdx].tasks[taskIdx].history = [];
+                }
+                this.boardsData[boardIdx].tasks[taskIdx].history.push(new TodoChange(TodoChangeName.ADD_COMMENT, '', new Date()));
+                dialogRef.content.instance.comments = this.boardsData[boardIdx].tasks[taskIdx].comments;
+            });
+            const closeSubscription: Subscription = dialogRef.content.instance.clickedClose.subscribe((): void => {
                 dialogRef.close();
             });
             const resultSubscription: Subscription = dialogRef.result.subscribe((): void => {

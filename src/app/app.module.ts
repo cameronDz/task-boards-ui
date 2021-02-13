@@ -17,6 +17,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { IconComponent } from './components/icon/icon.component';
 import { LoadBarIndicatorComponent } from './components/indicator/load-bar/load-bar-indicator.component';
 import { LoadCircleIndicatorComponent } from './components/indicator/load-circle/load-circle-indicator.component';
+import { TaskCommentDisplayComponent } from './components/forms/task-comment/display/task-comment-display.component';
+import { TaskCommentFormComponent } from './components/forms/task-comment/task-comment-form.component';
 import { TaskDeleteFormComponent } from './components/forms/task-delete/task-delete-form.component';
 import { TaskEditFormComponent } from './components/forms/task-edit/task-edit-form.component';
 import { TaskHistoryFormComponent } from './components/forms/task-history/task-history-form.component';
@@ -39,6 +41,8 @@ import { TaskHistoryChangeDisplayComponent } from './components/forms/task-histo
         IconComponent,
         LoadBarIndicatorComponent,
         LoadCircleIndicatorComponent,
+        TaskCommentDisplayComponent,
+        TaskCommentFormComponent,
         TaskDeleteFormComponent,
         TaskEditFormComponent,
         TaskHistoryChangeDisplayComponent,

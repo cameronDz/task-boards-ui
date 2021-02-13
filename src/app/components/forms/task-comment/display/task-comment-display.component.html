@@ -1,0 +1,8 @@
+<div *ngIf="!!comment" class="display-container">
+  <p>{{comment.date | dateFormatter}} -
+    <span *ngIf="!!comment.description" class="subtitle"> {{comment.description}}</span>
+  </p>
+</div>
+<div *ngIf="!comment">
+  {{noCommentToDisplay}}
+</div>

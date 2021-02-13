@@ -1,0 +1,24 @@
+<div class="comment-container">
+  <ng-container *ngIf="!isAddMode">
+    <div *ngIf="((!!comments) && (comments.length > 0))" class="list-area">
+      <ng-container *ngFor="let comment of comments">
+        <nssd-task-comment-display *ngIf="!!comment" [comment]="comment"></nssd-task-comment-display>
+      </ng-container>
+    </div>
+    <div *ngIf="((!comments) || (!(comments.length > 0)))">
+      <p class="subtitle">{{noCommentsToDisplay}}</p>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="isAddMode">
+    <div class="input-container">
+      <label for="description">Description</label><br />
+      <textarea class="description-area" name="description" [value]="description" (change)="handleChangedDescription($event)"></textarea>
+    </div>
+  </ng-container>
+</div>
+<div class="button-container">
+  <button *ngIf="((!isAddMode) && (!isReadOnly))" class="nssd-button" (click)="handleClickedAdd()">Add</button>
+  <button *ngIf="((isAddMode) && (!isReadOnly))" class="nssd-button" (click)="handleClickedSave()">Save</button>
+  <button *ngIf="!isAddMode" class="nssd-button" (click)="handleClickedClose()">Close</button>
+  <button *ngIf="isAddMode" class="nssd-button" (click)="handleClickedCancel()">Cancel</button>
+</div>
