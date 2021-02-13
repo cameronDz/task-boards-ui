@@ -119,6 +119,16 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         }
     }
 
+    public handleClickedTaskComment(taskId: string, boardId: string = ''): void {
+        if (!this.isLoading) {
+            const boardIdx: number = this.findBoardIndex(boardId);
+            const taskIdx: number = this.findTaskIndex(taskId, boardIdx);
+            if (taskIdx >= 0) {
+                this.openCommentDialog(boardIdx, taskIdx);
+            }
+        }
+    }
+
     public handleClickedTaskDelete(taskId: string, boardId: string = ''): void {
         if (!this.isLoading) {
             const boardIdx: number = this.findBoardIndex(boardId);
@@ -426,6 +436,28 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
             });
             const resultSubscription: Subscription = dialogRef.result.subscribe((): void => {
                 SubscriptionUtility.unsubscribe(saveSubscription);
+                SubscriptionUtility.unsubscribe(closeSubscription);
+                SubscriptionUtility.unsubscribe(resultSubscription);
+            });
+        }
+    }
+
+    private openCommentDialog(boardIdx: number = -1, taskIdx: number = -1): void {
+        if (taskIdx >= 0) {
+            const dialogOptions: DialogSettings = {
+                content: '',
+                height: 320,
+                maxWidth: '100%',
+                title: 'Task Comments',
+                width: 560
+            };
+            const dialogRef: DialogRef = this.dialogService.open(dialogOptions);
+            dialogRef.content.instance.comments = this.boardsData[boardIdx].tasks[taskIdx].comments;
+            dialogRef.content.instance.isReadOnly = this.boardsData[boardIdx].isArchived;
+            const closeSubscription: Subscription = dialogRef.content.instance.closeClick.subscribe((): void => {
+                dialogRef.close();
+            });
+            const resultSubscription: Subscription = dialogRef.result.subscribe((): void => {
                 SubscriptionUtility.unsubscribe(closeSubscription);
                 SubscriptionUtility.unsubscribe(resultSubscription);
             });

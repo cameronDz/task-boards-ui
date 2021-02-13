@@ -11,7 +11,7 @@ export class IconComponent implements OnChanges, OnInit {
     private readonly defaultIcon: string = 'info';
     private readonly defaultSize: string = 'lg';
     private readonly disabledCursor: string = 'disabled-cursor';
-    private readonly supportedIcons: Array<string> = ['archive', 'arrow-circle-left', 'arrow-circle-right', 'arrow-down', 'arrow-up', 'arrows', 'clipboard', 'download', 'eye', 'eye-slash', 'history', 'info', 'info-circle', 'minus', 'plus', 'save', 'trash'];
+    private readonly supportedIcons: Array<string> = ['archive', 'arrow-circle-left', 'arrow-circle-right', 'arrow-down', 'arrow-up', 'arrows', 'clipboard', 'download', 'eye', 'eye-slash', 'history', 'info', 'info-circle', 'minus', 'plus', 'save', 'sticky-note', 'trash'];
     private readonly supportedSizes: Array<string> = ['lg', '2x'];
 
     @Input() disabledTitle: string = 'Disabled';

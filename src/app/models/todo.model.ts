@@ -18,7 +18,13 @@ export class TodoTask {
         public status: string = '',
         public createdDate: Date = null,
         public modifiedDate: Date = null,
-        public history: Array<any> = []) {}
+        public history: Array<TodoChange> = [],
+        public comments: Array<TodoComment> = []) {}
+}
+
+export class TodoComment {
+
+    constructor(public description: string, public date: Date = null) {}
 }
 
 export class TodoChange {
@@ -31,6 +37,7 @@ export class TodoChange {
 
 export enum TodoChangeName {
     NONE = '',
+    ADD_COMMENT = 'Added Comment',
     CREATED = 'Task Created',
     MODIFIED_DETAILS = 'Task Details Modified',
     MOVE_BOARD = 'Move Task Board',

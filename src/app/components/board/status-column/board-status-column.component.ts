@@ -12,6 +12,7 @@ export class BoardStatusColumnComponent implements OnInit {
         { isDisabledWhenArchived: true, title: 'Move Task Up', type: 'arrow-up'},
         { isDisabledWhenArchived: false, title: 'View Details', type: 'info-circle'},
         { isDisabledWhenArchived: false, title: 'View Task History', type: 'history'},
+        { isDisabledWhenArchived: false, title: 'View Comments', type: 'sticky-note'},
         { isDisabledWhenArchived: true, title: 'Move Task to another Board', type: 'arrows'},
         { isDisabledWhenArchived: true, title: 'Delete Task', type: 'trash'},
         { isDisabledWhenArchived: true, title: 'Move Task Down', type: 'arrow-down'}
@@ -29,6 +30,7 @@ export class BoardStatusColumnComponent implements OnInit {
     @Output() clickedHistory: EventEmitter<string> = new EventEmitter<string>();
     @Output() clickedInfo: EventEmitter<string> = new EventEmitter<string>();
     @Output() clickedMove: EventEmitter<string> = new EventEmitter<string>();
+    @Output() clickedStickyNote: EventEmitter<string> = new EventEmitter<string>();
     @Output() clickedTrash: EventEmitter<string> = new EventEmitter<string>();
     @Output() clickedUp: EventEmitter<string> = new EventEmitter<string>();
 
@@ -52,6 +54,9 @@ export class BoardStatusColumnComponent implements OnInit {
                 break;
             case ('info-circle'):
                 this.emitEvent(this.clickedInfo, id, type);
+                break;
+            case ('sticky-note'):
+                this.emitEvent(this.clickedStickyNote, id, type);
                 break;
             case ('trash'):
                 this.emitEvent(this.clickedTrash, id, type);
