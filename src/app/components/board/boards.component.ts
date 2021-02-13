@@ -504,6 +504,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
             };
             const dialogRef: DialogRef = this.dialogService.open(dialogOptions);
             dialogRef.content.instance.task = this.boardsData[boardIdx].tasks[taskIdx];
+            dialogRef.content.instance.isReadOnly = this.boardsData[boardIdx].isArchived;
             const saveSubscription: Subscription = dialogRef.content.instance.saveTodoTask.subscribe((updatedTask: TodoTask): void => {
                 this.updateTask(updatedTask, taskIdx, boardIdx);
                 dialogRef.close();

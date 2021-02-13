@@ -8,6 +8,7 @@ import { TodoChange, TodoChangeName, TodoTask } from '../../../models/todo.model
 })
 export class TaskEditFormComponent implements OnInit {
 
+    @Input() isReadOnly: boolean = false;
     @Input() task: TodoTask = null;
 
     @Output() closeTodoTask: EventEmitter<void> = new EventEmitter<void>();

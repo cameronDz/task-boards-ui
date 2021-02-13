@@ -21,7 +21,7 @@
           <ng-container *ngFor="let icon of centerIcons">
             <nssd-icon *ngIf="!!icon"
               [disabledTitle]="disabledLoadingMessage"
-              [isDisabled]="((isArchived) || (isLoading))"
+              [isDisabled]="(((icon.isDisabledWhenArchived) && (isArchived)) || (isLoading))"
               [size]="'lg'"
               [title]="icon.title"
               [type]="icon.type"
