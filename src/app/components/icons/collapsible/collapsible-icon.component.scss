@@ -1,0 +1,9 @@
+img {
+  cursor: pointer;
+  height: 18px;
+  margin-left: 12px;
+
+  &.rotated-image {
+    transform: rotate(90deg);
+  }
+}
