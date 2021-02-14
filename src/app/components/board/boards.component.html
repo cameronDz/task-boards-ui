@@ -1,47 +1,47 @@
 <div class="header-container">
   <div class="board-message-text">
     <p class="board-icon-text">
-      <nssd-icon
+      <nssd-generic-icon
         [disabledTitle]="messageDisableTitle"
         [isDisabled]="isLoading"
         [size]="'lg'"
         [title]="'Add another Board'"
         [type]="'clipboard'"
         (clickedIcon)="handleClickedAddBoard()">
-      </nssd-icon>
+      </nssd-generic-icon>
       Add Board
     </p>
     <p class="board-icon-text">
-      <nssd-icon
+      <nssd-generic-icon
         [disabledTitle]="messageDisableTitle"
         [isDisabled]="isLoading"
         [size]="'lg'"
         [title]="'Save all Boards'"
         [type]="'download'"
         (clickedIcon)="handleClickedDownloadAll()">
-      </nssd-icon>
+      </nssd-generic-icon>
       Download Boards
     </p>
     <p class="board-icon-text">
-      <nssd-icon
+      <nssd-generic-icon
         [disabledTitle]="messageDisableTitle"
         [isDisabled]="isLoading"
         [size]="'lg'"
         [title]="'Upload Boards'"
         [type]="'save'"
         (clickedIcon)="handleClickedUploadAll()">
-      </nssd-icon>
+      </nssd-generic-icon>
       Save Boards
     </p>
     <p class="board-icon-text">
-      <nssd-icon
+      <nssd-generic-icon
         [disabledTitle]="messageDisableTitle"
         [isDisabled]="isLoading"
         [size]="'lg'"
         [title]="hideArchivedBoards ? messageShowArchivedBoard : messageHideArchivedBoard"
         [type]="hideArchivedBoards ? 'eye' : 'eye-slash'"
         (clickedIcon)="handleClickedHideShowArchivedBoards()">
-      </nssd-icon>
+      </nssd-generic-icon>
       {{hideArchivedBoards ? messageShowArchivedBoard : messageHideArchivedBoard}}
     </p>
   </div>
@@ -56,7 +56,7 @@
       <div class="board-title-container">
         <h1 *ngIf="!!board.name" class="board-title">{{board.name}}</h1>
         <div class="icon-container">
-          <nssd-icon
+          <nssd-generic-icon
             [disabledTitle]="messageDisableTitle"
             [isDisabled]="isLoading"
             [isShown]="((board.isOpen) && (!board.isArchived))"
@@ -64,32 +64,32 @@
             [title]="'Add Task'"
             [type]="'plus'"
             (clickedIcon)="handleClickedBoardAddTask(board.id)">
-          </nssd-icon>
-          <nssd-icon
+          </nssd-generic-icon>
+          <nssd-generic-icon
             [disabledTitle]="messageDisableTitle"
             [isDisabled]="isLoading"
             [size]="'2x'"
             [title]="board.isOpen ? 'Collapse Board' : 'Expand Board'"
             [type]="'minus'"
             (clickedIcon)="handleClickedBoardHideShow(board.id)">
-          </nssd-icon>
-          <nssd-icon
+          </nssd-generic-icon>
+          <nssd-generic-icon
             [disabledTitle]="messageDisableTitle"
             [isDisabled]="isLoading"
             [size]="'2x'"
             [title]="'Move Board Up'"
             [type]="'arrow-up'"
             (clickedIcon)="handleClickedBoardUp(board.id)">
-          </nssd-icon>
-          <nssd-icon
+          </nssd-generic-icon>
+          <nssd-generic-icon
             [disabledTitle]="messageDisableTitle"
             [isDisabled]="isLoading"
             [size]="'2x'"
             [title]="'Move Board Down'"
             [type]="'arrow-down'"
             (clickedIcon)="handleClickedBoardDown(board.id)">
-          </nssd-icon>
-          <nssd-icon
+          </nssd-generic-icon>
+          <nssd-generic-icon
             [disabledTitle]="messageDisableTitle"
             [isDisabled]="isLoading"
             [isShown]="board.isOpen"
@@ -97,8 +97,8 @@
             [title]="'Edit Board'"
             [type]="'info-circle'"
             (clickedIcon)="handleClickedBoardEdit(board.id)">
-          </nssd-icon>
-          <nssd-icon
+          </nssd-generic-icon>
+          <nssd-generic-icon
             [disabledTitle]="messageDisableTitle"
             [isDisabled]="isLoading"
             [isShown]="board.isOpen"
@@ -106,8 +106,8 @@
             [title]="'Download Board'"
             [type]="'download'"
             (clickedIcon)="handleClickedBoardDownload(board.id)">
-          </nssd-icon>
-          <nssd-icon
+          </nssd-generic-icon>
+          <nssd-generic-icon
             [disabledTitle]="messageDisableTitle"
             [isDisabled]="isLoading"
             [isShown]="((board.isOpen) || (board.isArchived))"
@@ -116,7 +116,7 @@
             [type]="'archive'"
             [wildCardClasses]="board.isArchived ? 'color-lightgray' : ''"
             (clickedIcon)="handleClickedBoardArchive(board.id)">
-          </nssd-icon>
+          </nssd-generic-icon>
         </div>
       </div>
       <div class="board-container {{!board.isOpen ? 'collapsed-container' : ''}}">

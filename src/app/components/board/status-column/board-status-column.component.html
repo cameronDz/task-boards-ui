@@ -8,36 +8,36 @@
       </div>
       <div class="icon-bar-container">
         <p class="icon-container left-icon">
-          <nssd-icon
+          <nssd-generic-icon
             [disabledTitle]="disabledLoadingMessage"
             [isDisabled]="((isArchived) || (isLoading) || (status === 'created'))"
             [size]="'2x'"
             [title]="'Move Task Back'"
             [type]="'arrow-circle-left'"
             (clickedIcon)="handleClickedIconBack(task.id)">
-          </nssd-icon>
+          </nssd-generic-icon>
         </p>
         <p class="icon-container center-icon">
           <ng-container *ngFor="let icon of centerIcons">
-            <nssd-icon *ngIf="!!icon"
+            <nssd-generic-icon *ngIf="!!icon"
               [disabledTitle]="disabledLoadingMessage"
               [isDisabled]="(((icon.isDisabledWhenArchived) && (isArchived)) || (isLoading))"
               [size]="'lg'"
               [title]="icon.title"
               [type]="icon.type"
               (clickedIcon)="handleClickedIcon(icon.type, task.id)">
-            </nssd-icon>
+            </nssd-generic-icon>
           </ng-container>
         </p>
         <p class="icon-container right-icon">
-          <nssd-icon
+          <nssd-generic-icon
             [disabledTitle]="disabledLoadingMessage"
             [isDisabled]="((isArchived) || (isLoading) || (status === 'completed'))"
             [size]="'2x'"
             [title]="'Move Task Foward'"
             [type]="'arrow-circle-right'"
             (clickedIcon)="handleClickedIconForward(task.id)">
-          </nssd-icon>
+          </nssd-generic-icon>
         </p>
       </div>
     </div>

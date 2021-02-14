@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, OnChanges, Output } from '@angular/core';
+import { Component, Input, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
 
 @Component({
-    selector: 'nssd-icon',
-    templateUrl: './icon.component.html',
-    styleUrls: ['./icon.component.scss']
+    selector: 'nssd-generic-icon',
+    templateUrl: './generic-icon.component.html',
+    styleUrls: ['./generic-icon.component.scss']
 })
-export class IconComponent implements OnChanges, OnInit {
+export class GenericIconComponent implements OnChanges, OnInit {
 
     private readonly defaultCursor: string = 'icon-cursor';
     private readonly defaultIcon: string = 'info';
