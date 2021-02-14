@@ -2,24 +2,24 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GenericIconComponent } from './generic-icon.component';
 
-describe('GenericIconComponent', () => {
-  let component: GenericIconComponent;
-  let fixture: ComponentFixture<GenericIconComponent>;
+xdescribe('GenericIconComponent', () => {
+    let component: GenericIconComponent;
+    let fixture: ComponentFixture<GenericIconComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ GenericIconComponent ]
-    })
-    .compileComponents();
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+        declarations: [ GenericIconComponent ]
+        })
+        .compileComponents();
+    });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(GenericIconComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(GenericIconComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });
