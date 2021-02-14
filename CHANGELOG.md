@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Notes property on tasks with notes icon for viewing and adding new notes
+- Ability to view and edit board details with info icon on boards
 
 ### Changed
 - Info and History dialogs can be viewed when board is archived

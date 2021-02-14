@@ -6,7 +6,8 @@ export class TodoBoard {
         public tasks: Array<TodoTask> = [],
         public description: string = '',
         public isOpen: boolean = true,
-        public isArchived: boolean = false) {}
+        public isArchived: boolean = false,
+        public createdDate: Date = null) {}
 }
 
 export class TodoTask {

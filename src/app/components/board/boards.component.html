@@ -94,6 +94,15 @@
             [isDisabled]="isLoading"
             [isShown]="board.isOpen"
             [size]="'2x'"
+            [title]="'Edit Board'"
+            [type]="'info-circle'"
+            (clickedIcon)="handleClickedBoardEdit(board.id)">
+          </nssd-icon>
+          <nssd-icon
+            [disabledTitle]="messageDisableTitle"
+            [isDisabled]="isLoading"
+            [isShown]="board.isOpen"
+            [size]="'2x'"
             [title]="'Download Board'"
             [type]="'download'"
             (clickedIcon)="handleClickedBoardDownload(board.id)">

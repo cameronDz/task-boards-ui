@@ -87,6 +87,15 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
         }
     }
 
+    public handleClickedBoardEdit(boardId: string): void {
+        if (!this.isLoading) {
+            const boardIdx: number = this.findBoardIndex(boardId);
+            if (boardIdx >= 0) {
+                this.openEditBoardDialog(boardIdx);
+            }
+        }
+    }
+
     public handleClickedBoardHideShow(boardId: string): void {
         if (!this.isLoading) {
             const boardIdx: number = this.findBoardIndex(boardId);
@@ -398,7 +407,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
             width: 460,
         };
         const dialogRef: DialogRef = this.dialogService.open(dialogOptions);
-        const saveSubscription: Subscription = dialogRef.content.instance.saveClick.subscribe((board: TodoBoard): void => {
+        const saveSubscription: Subscription = dialogRef.content.instance.clickedSave.subscribe((board: TodoBoard): void => {
             if (!!board) {
                 if (!Array.isArray(this.boardsData)) {
                     this.boardsData = [];
@@ -407,7 +416,7 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
             }
             dialogRef.close();
         });
-        const closeSubscription: Subscription = dialogRef.content.instance.closeForm.subscribe((): void => {
+        const closeSubscription: Subscription = dialogRef.content.instance.clickedClose.subscribe((): void => {
             dialogRef.close();
         });
         const resultSubscription: Subscription = dialogRef.result.subscribe((): void => {
@@ -472,6 +481,34 @@ export class BoardsComponent extends BaseComponent implements OnDestroy, OnInit 
             const resultSubscription: Subscription = dialogRef.result.subscribe((): void => {
                 SubscriptionUtility.unsubscribe(closeSubscription);
                 SubscriptionUtility.unsubscribe(resultSubscription);
+            });
+        }
+    }
+
+    private openEditBoardDialog(boardIdx: number = -1): void {
+        if (boardIdx >= 0) {
+            const dialogOptions: DialogSettings = {
+                content: BoardEditFormComponent,
+                height: 320,
+                maxWidth: '100%',
+                title: 'Edit Board Details',
+                width: 560
+            };
+            const dialogRef: DialogRef = this.dialogService.open(dialogOptions);
+            dialogRef.content.instance.todoBoard = this.boardsData[boardIdx];
+            const closeSubscription: Subscription = dialogRef.content.instance.clickedClose.subscribe((): void => {
+                dialogRef.close();
+            });
+            const saveSubscription: Subscription = dialogRef.content.instance.clickedSave.subscribe((board: TodoBoard): void => {
+                if (!!board) {
+                    this.boardsData[boardIdx] = board;
+                }
+                dialogRef.close();
+            });
+            const resultSubscription: Subscription = dialogRef.result.subscribe((): void => {
+                SubscriptionUtility.unsubscribe(closeSubscription);
+                SubscriptionUtility.unsubscribe(resultSubscription);
+                SubscriptionUtility.unsubscribe(saveSubscription);
             });
         }
     }
