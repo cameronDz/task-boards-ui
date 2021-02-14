@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Ability to view and edit board details with info icon on boards
 
 ### Changed
+- Switch minus icon with triangle icon to expand/collapse boards
 - Info and History dialogs can be viewed when board is archived
 - Set disabled title on icons when clicking is disabled
 - Faded description text on task card displays
