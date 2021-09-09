@@ -9,7 +9,7 @@ import { onCompleteCallback, onErrorCallback, onSuccessCallback } from '../model
 export class BoardHttpService {
 
     private readonly placeholder: string = '${endpoint}';
-    private readonly ALL_BOARDS_URL: string = 'https://nssd-boards-s3-api.herokuapp.com/json/${endpoint}/allBoards';
+    private readonly ALL_BOARDS_URL: string = 'https://task-boards-storage-api.herokuapp.com/json/${endpoint}/allBoards';
     private readonly GET_ENDPOINT: string = 'object';
     private readonly PUT_ENDPOINT: string = 'update';
 

@@ -5,11 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.4.0] 2021-09-08
 ### Added
 - Notes property on tasks with notes icon for viewing and adding new notes
 - Ability to view and edit board details with info icon on boards
 
 ### Changed
+- URL path for API storage endpoint
 - Switch minus icon with triangle icon to expand/collapse boards
 - Info and History dialogs can be viewed when board is archived
 - Set disabled title on icons when clicking is disabled
