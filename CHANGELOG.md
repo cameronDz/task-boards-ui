@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Regenerate package-lock to use v2 version
+
 ## [1.4.0] 2021-09-08
 ### Added
 - Notes property on tasks with notes icon for viewing and adding new notes
